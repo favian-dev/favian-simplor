@@ -1,6 +1,6 @@
 {
   "name": "@favian/simplor",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "peerDependencies": {
     "@angular/common": "^17.0.0",
     "@angular/core": "^17.0.0",
@@ -22,6 +22,7 @@
     "UI",
     "UI Kit"
   ],
+  "repository": "https://github.com/favian-dev/favian-simplor",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
