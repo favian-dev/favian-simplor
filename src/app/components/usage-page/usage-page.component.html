@@ -1,0 +1,1128 @@
+<header class="app-usage-header spl-flex spl-items-center spl-ph-16">
+  <button
+    (click)="navigationOpened = !navigationOpened"
+    class="app-menu-button">
+    <spl-icon weight="200">{{navigationOpened ? 'close' : 'menu'}}</spl-icon>
+  </button>
+
+  <h1 class="spl-fs-l">
+    Favian Simplor UI Kit
+  </h1>
+</header>
+
+<ng-template
+  #navigationTemplate
+  let-navigations>
+  <ul>
+    <li *ngFor="let item of navigations">
+      <a
+        (click)="toHeading(item.hash)"
+        [attr.data-id]="item.hash"
+        [class.app-highlighted]="item.hash === highlightedNavigation"
+        class="spl-pv-4 spl-clickable">
+        {{item.label}}
+      </a>
+
+      <ng-container *ngIf="item.children && item.children.length > 0">
+        <ng-container *ngTemplateOutlet="navigationTemplate; context: { $implicit: item.children }"></ng-container>
+      </ng-container>
+    </li>
+  </ul>
+</ng-template>
+
+<aside
+  #usageAside
+  [class.app-usage-sidebar-opened]="navigationOpened"
+  class="app-usage-sidebar">
+  <nav class="spl-p-24">
+    <ng-container *ngTemplateOutlet="navigationTemplate; context: { $implicit: navigations }"></ng-container>
+  </nav>
+</aside>
+
+<div
+  #usageContent
+  class="app-usage-content">
+  <h1 id="overview">
+    Overview
+  </h1>
+
+  <section>
+    <markdown src="/assets/overview.md"></markdown>
+  </section>
+
+  <h1 id="getting-started">
+    Getting started
+  </h1>
+
+  <section>
+    <markdown src="/assets/getting-started.md"></markdown>
+  </section>
+
+  <h1 id="css-variables">
+    CSS Variables
+  </h1>
+
+  <section>
+    <markdown src="/assets/css-variables.md"></markdown>
+  </section>
+
+  <h1 id="logger">
+    Logger
+  </h1>
+
+  <section>
+    <markdown src="/assets/logger.md"></markdown>
+  </section>
+
+  <h1 id="examples">
+    Examples
+  </h1>
+
+  <h2 id="box">
+    Box
+  </h2>
+
+  <h3 id="box-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/box-overview.md"></markdown>
+  </section>
+
+  <h3 id="box-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-box-example-i></app-box-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/box-example-i.md"></markdown>
+  </section>
+
+  <h2 id="button">
+    Button
+  </h2>
+
+  <h3 id="button-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/button-overview.md"></markdown>
+  </section>
+
+  <h3 id="button-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-button-example-i></app-button-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/button-example-i.md"></markdown>
+  </section>
+
+  <h2 id="calendar">
+    Calendar
+  </h2>
+
+  <h3 id="calendar-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/calendar-overview.md"></markdown>
+  </section>
+
+  <h3 id="calendar-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-calendar-example-i></app-calendar-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/calendar-example-i.md"></markdown>
+  </section>
+
+  <h3 id="calendar-example-ii">
+    Calendar types
+  </h3>
+
+  <section>
+    <app-calendar-example-ii></app-calendar-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/calendar-example-ii.md"></markdown>
+  </section>
+
+  <h3 id="calendar-example-iii">
+    Display date changes
+  </h3>
+
+  <section>
+    <app-calendar-example-iii></app-calendar-example-iii>
+  </section>
+
+  <section>
+    <markdown src="/assets/calendar-example-iii.md"></markdown>
+  </section>
+
+  <h3 id="calendar-example-iv">
+    Limit selectable dates
+  </h3>
+
+  <section>
+    <app-calendar-example-iv></app-calendar-example-iv>
+  </section>
+
+  <section>
+    <markdown src="/assets/calendar-example-iv.md"></markdown>
+  </section>
+
+  <h3 id="calendar-example-v">
+    Customize calendar
+  </h3>
+
+  <section>
+    <app-calendar-example-v></app-calendar-example-v>
+  </section>
+
+  <section>
+    <markdown src="/assets/calendar-example-v.md"></markdown>
+  </section>
+
+  <h2 id="checkbox">
+    Checkbox
+  </h2>
+
+  <h3 id="checkbox-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/checkbox-overview.md"></markdown>
+  </section>
+
+  <h3 id="checkbox-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-checkbox-example-i></app-checkbox-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/checkbox-example-i.md"></markdown>
+  </section>
+
+  <h2 id="control-validator">
+    ControlValidator
+  </h2>
+
+  <h3 id="control-validator-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/control-validator-overview.md"></markdown>
+  </section>
+
+  <h3 id="control-validator-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-control-validator-example-i></app-control-validator-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/control-validator-example-i.md"></markdown>
+  </section>
+
+  <h2 id="date-input">
+    DateInput
+  </h2>
+
+  <h3 id="date-input-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/date-input-overview.md"></markdown>
+  </section>
+
+  <h3 id="date-input-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-date-input-example-i></app-date-input-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/date-input-example-i.md"></markdown>
+  </section>
+
+  <h3 id="date-input-example-ii">
+    Limit selectable date
+  </h3>
+
+  <section>
+    <app-date-input-example-ii></app-date-input-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/date-input-example-ii.md"></markdown>
+  </section>
+
+  <h3 id="date-input-example-iii">
+    Limit input and selectable dates
+  </h3>
+
+  <section>
+    <app-date-input-example-iii></app-date-input-example-iii>
+  </section>
+
+  <section>
+    <markdown src="/assets/date-input-example-iii.md"></markdown>
+  </section>
+
+  <h3 id="date-input-example-iv">
+    Customize date input
+  </h3>
+
+  <section>
+    <app-date-input-example-iv></app-date-input-example-iv>
+  </section>
+
+  <section>
+    <markdown src="/assets/date-input-example-iv.md"></markdown>
+  </section>
+
+  <h3 id="date-input-example-v">
+    Customize date input and calendar
+  </h3>
+
+  <section>
+    <app-date-input-example-v></app-date-input-example-v>
+  </section>
+
+  <section>
+    <markdown src="/assets/date-input-example-v.md"></markdown>
+  </section>
+
+  <h2 id="drawer">
+    Drawer
+  </h2>
+
+  <h3 id="drawer-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/drawer-overview.md"></markdown>
+  </section>
+
+  <h3 id="drawer-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-drawer-example-i></app-drawer-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/drawer-example-i.md"></markdown>
+  </section>
+
+  <h3 id="drawer-example-ii">
+    SplDrawerRef
+  </h3>
+
+  <section>
+    <app-drawer-example-ii></app-drawer-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/drawer-example-ii.md"></markdown>
+  </section>
+
+  <h3 id="drawer-example-iii">
+    SPL_DRAWER_DATA
+  </h3>
+
+  <section>
+    <app-drawer-example-iii></app-drawer-example-iii>
+  </section>
+
+  <section>
+    <markdown src="/assets/drawer-example-iii.md"></markdown>
+  </section>
+
+  <h3 id="drawer-example-iv">
+    Handle result
+  </h3>
+
+  <section>
+    <app-drawer-example-iv></app-drawer-example-iv>
+  </section>
+
+  <section>
+    <markdown src="/assets/drawer-example-iv.md"></markdown>
+  </section>
+
+  <h3 id="drawer-example-v">
+    Custom classes and styles
+  </h3>
+
+  <section>
+    <app-drawer-example-v></app-drawer-example-v>
+  </section>
+
+  <section>
+    <markdown src="/assets/drawer-example-v.md"></markdown>
+  </section>
+
+  <h3 id="drawer-example-vi">
+    Pass providers
+  </h3>
+
+  <section>
+    <app-drawer-example-vi></app-drawer-example-vi>
+  </section>
+
+  <section>
+    <markdown src="/assets/drawer-example-vi.md"></markdown>
+  </section>
+
+  <h2 id="effect">
+    Effect
+  </h2>
+
+  <h3 id="effect-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/effect-overview.md"></markdown>
+  </section>
+
+  <h3 id="effect-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-effect-example-i></app-effect-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/effect-example-i.md"></markdown>
+  </section>
+
+  <h2 id="form-field">
+    FormField
+  </h2>
+
+  <h3 id="form-field-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/form-field-overview.md"></markdown>
+  </section>
+
+  <h3 id="form-field-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-form-field-example-i></app-form-field-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/form-field-example-i.md"></markdown>
+  </section>
+
+  <h3 id="form-field-example-ii">
+    With hints or errors
+  </h3>
+
+  <section>
+    <app-form-field-example-ii></app-form-field-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/form-field-example-ii.md"></markdown>
+  </section>
+
+  <h2 id="horizontal-slider">
+    HorizontalSlider
+  </h2>
+
+  <h3 id="horizontal-slider-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/horizontal-slider-overview.md"></markdown>
+  </section>
+
+  <h3 id="horizontal-slider-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-horizontal-slider-example-i></app-horizontal-slider-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/horizontal-slider-example-i.md"></markdown>
+  </section>
+
+  <h3 id="horizontal-slider-example-ii">
+    Handle events
+  </h3>
+
+  <section>
+    <app-horizontal-slider-example-ii></app-horizontal-slider-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/horizontal-slider-example-ii.md"></markdown>
+  </section>
+
+  <h2 id="icon">
+    Icon
+  </h2>
+
+  <h3 id="icon-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/icon-overview.md"></markdown>
+  </section>
+
+  <h3 id="icon-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-icon-example-i></app-icon-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/icon-example-i.md"></markdown>
+  </section>
+
+  <h3 id="icon-example-ii">
+    Font variables
+  </h3>
+
+  <section>
+    <app-icon-example-ii></app-icon-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/icon-example-ii.md"></markdown>
+  </section>
+
+  <h2 id="input">
+    Input
+  </h2>
+
+  <h3 id="input-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/input-overview.md"></markdown>
+  </section>
+
+  <h3 id="input-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-input-example-i></app-input-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/input-example-i.md"></markdown>
+  </section>
+
+  <h2 id="message">
+    Message
+  </h2>
+
+  <h3 id="message-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/message-overview.md"></markdown>
+  </section>
+
+  <h3 id="message-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-message-example-i></app-message-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/message-example-i.md"></markdown>
+  </section>
+
+  <h2 id="modal">
+    Modal
+  </h2>
+
+  <h3 id="modal-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/modal-overview.md"></markdown>
+  </section>
+
+  <h3 id="modal-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-modal-example-i></app-modal-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/modal-example-i.md"></markdown>
+  </section>
+
+  <h3 id="modal-example-ii">
+    SplModalRef
+  </h3>
+
+  <section>
+    <app-modal-example-ii></app-modal-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/modal-example-ii.md"></markdown>
+  </section>
+
+  <h3 id="modal-example-iii">
+    SPL_MODAL_DATA
+  </h3>
+
+  <section>
+    <app-modal-example-iii></app-modal-example-iii>
+  </section>
+
+  <section>
+    <markdown src="/assets/modal-example-iii.md"></markdown>
+  </section>
+
+  <h3 id="modal-example-iv">
+    Handle result
+  </h3>
+
+  <section>
+    <app-modal-example-iv></app-modal-example-iv>
+  </section>
+
+  <section>
+    <markdown src="/assets/modal-example-iv.md"></markdown>
+  </section>
+
+  <h3 id="modal-example-v">
+    Custom classes and styles
+  </h3>
+
+  <section>
+    <app-modal-example-v></app-modal-example-v>
+  </section>
+
+  <section>
+    <markdown src="/assets/modal-example-v.md"></markdown>
+  </section>
+
+  <h3 id="modal-example-vi">
+    Pass providers
+  </h3>
+
+  <section>
+    <app-modal-example-vi></app-modal-example-vi>
+  </section>
+
+  <section>
+    <markdown src="/assets/modal-example-vi.md"></markdown>
+  </section>
+
+  <h3 id="modal-example-vii">
+    Use predefined modal components
+  </h3>
+
+  <section>
+    <app-modal-example-vii></app-modal-example-vii>
+  </section>
+
+  <section>
+    <markdown src="/assets/modal-example-vii.md"></markdown>
+  </section>
+
+  <h2 id="overlay">
+    Overlay
+  </h2>
+
+  <h3 id="overlay-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/overlay-overview.md"></markdown>
+  </section>
+
+  <h3 id="overlay-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-overlay-example-i></app-overlay-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/overlay-example-i.md"></markdown>
+  </section>
+
+  <h3 id="overlay-example-ii">
+    SplOverlayRef
+  </h3>
+
+  <section>
+    <app-overlay-example-ii></app-overlay-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/overlay-example-ii.md"></markdown>
+  </section>
+
+  <h3 id="overlay-example-iii">
+    SPL_OVERLAY_DATA
+  </h3>
+
+  <section>
+    <app-overlay-example-iii></app-overlay-example-iii>
+  </section>
+
+  <section>
+    <markdown src="/assets/overlay-example-iii.md"></markdown>
+  </section>
+
+  <h3 id="overlay-example-iv">
+    Handle result
+  </h3>
+
+  <section>
+    <app-overlay-example-iv></app-overlay-example-iv>
+  </section>
+
+  <section>
+    <markdown src="/assets/overlay-example-iv.md"></markdown>
+  </section>
+
+  <h3 id="overlay-example-v">
+    Custom classes and styles
+  </h3>
+
+  <section>
+    <app-overlay-example-v></app-overlay-example-v>
+  </section>
+
+  <section>
+    <markdown src="/assets/overlay-example-v.md"></markdown>
+  </section>
+
+  <h3 id="overlay-example-vi">
+    Pass providers
+  </h3>
+
+  <section>
+    <app-overlay-example-vi></app-overlay-example-vi>
+  </section>
+
+  <section>
+    <markdown src="/assets/overlay-example-vi.md"></markdown>
+  </section>
+
+  <h3 id="overlay-example-vii">
+    Update overlay's styles
+  </h3>
+
+  <section>
+    <app-overlay-example-vii></app-overlay-example-vii>
+  </section>
+
+  <section>
+    <markdown src="/assets/overlay-example-vii.md"></markdown>
+  </section>
+
+  <h2 id="paginator">
+    Paginator
+  </h2>
+
+  <h3 id="paginator-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/paginator-overview.md"></markdown>
+  </section>
+
+  <h3 id="paginator-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-paginator-example-i></app-paginator-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/paginator-example-i.md"></markdown>
+  </section>
+
+  <h3 id="paginator-example-ii">
+    Size options
+  </h3>
+
+  <section>
+    <app-paginator-example-ii></app-paginator-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/paginator-example-ii.md"></markdown>
+  </section>
+
+  <h3 id="paginator-example-iii">
+    Customize paginator
+  </h3>
+
+  <section>
+    <app-paginator-example-iii></app-paginator-example-iii>
+  </section>
+
+  <section>
+    <markdown src="/assets/paginator-example-iii.md"></markdown>
+  </section>
+
+  <h2 id="progress-bar">
+    ProgressBar
+  </h2>
+
+  <h3 id="progress-bar-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/progress-bar-overview.md"></markdown>
+  </section>
+
+  <h3 id="progress-bar-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-progress-bar-example-i></app-progress-bar-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/progress-bar-example-i.md"></markdown>
+  </section>
+
+  <h2 id="radio-group">
+    RadioGroup
+  </h2>
+
+  <h3 id="radio-group-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/radio-group-overview.md"></markdown>
+  </section>
+
+  <h3 id="radio-group-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-radio-group-example-i></app-radio-group-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/radio-group-example-i.md"></markdown>
+  </section>
+
+  <h3 id="radio-group-example-ii">
+    Direction
+  </h3>
+
+  <section>
+    <app-radio-group-example-ii></app-radio-group-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/radio-group-example-ii.md"></markdown>
+  </section>
+
+  <h2 id="select">
+    Select
+  </h2>
+
+  <h3 id="select-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/select-overview.md"></markdown>
+  </section>
+
+  <h3 id="select-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-select-example-i></app-select-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/select-example-i.md"></markdown>
+  </section>
+
+  <h3 id="select-example-ii">
+    Label and value in option
+  </h3>
+
+  <section>
+    <app-select-example-ii></app-select-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/select-example-ii.md"></markdown>
+  </section>
+
+  <h2 id="tab-group">
+    TabGroup
+  </h2>
+
+  <h3 id="tab-group-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/tab-group-overview.md"></markdown>
+  </section>
+
+  <h3 id="tab-group-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-tab-group-example-i></app-tab-group-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/tab-group-example-i.md"></markdown>
+  </section>
+
+  <h3 id="tab-group-example-ii">
+    Header alignments
+  </h3>
+
+  <section>
+    <app-tab-group-example-ii></app-tab-group-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/tab-group-example-ii.md"></markdown>
+  </section>
+
+  <h3 id="tab-group-example-iii">
+    Control tab group
+  </h3>
+
+  <section>
+    <app-tab-group-example-iii></app-tab-group-example-iii>
+  </section>
+
+  <section>
+    <markdown src="/assets/tab-group-example-iii.md"></markdown>
+  </section>
+
+  <h3 id="tab-group-example-iv">
+    ActiveIndex
+  </h3>
+
+  <section>
+    <app-tab-group-example-iv></app-tab-group-example-iv>
+  </section>
+
+  <section>
+    <markdown src="/assets/tab-group-example-iv.md"></markdown>
+  </section>
+
+  <h3 id="tab-group-example-v">
+    Instant
+  </h3>
+
+  <section>
+    <app-tab-group-example-v></app-tab-group-example-v>
+  </section>
+
+  <section>
+    <markdown src="/assets/tab-group-example-v.md"></markdown>
+  </section>
+
+  <h2 id="table">
+    Table
+  </h2>
+
+  <h3 id="table-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/table-overview.md"></markdown>
+  </section>
+
+  <h3 id="table-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-table-example-i></app-table-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/table-example-i.md"></markdown>
+  </section>
+
+  <h3 id="table-example-ii">
+    Sortable columns
+  </h3>
+
+  <section>
+    <app-table-example-ii></app-table-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/table-example-ii.md"></markdown>
+  </section>
+
+  <h2 id="textarea">
+    Textarea
+  </h2>
+
+  <h3 id="textarea-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/textarea-overview.md"></markdown>
+  </section>
+
+  <h3 id="textarea-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-textarea-example-i></app-textarea-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/textarea-example-i.md"></markdown>
+  </section>
+
+  <h2 id="time-input">
+    TimeInput
+  </h2>
+
+  <h3 id="time-input-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/time-input-overview.md"></markdown>
+  </section>
+
+  <h3 id="time-input-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-time-input-example-i></app-time-input-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/time-input-example-i.md"></markdown>
+  </section>
+
+  <h3 id="time-input-example-ii">
+    Use 24 hours
+  </h3>
+
+  <section>
+    <app-time-input-example-ii></app-time-input-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/time-input-example-ii.md"></markdown>
+  </section>
+
+  <h2 id="toggle-button-group">
+    ToggleButtonGroup
+  </h2>
+
+  <h3 id="toggle-button-group-overview">
+    Overview
+  </h3>
+
+  <section>
+    <markdown src="/assets/toggle-button-group-overview.md"></markdown>
+  </section>
+
+  <h3 id="toggle-button-group-example-i">
+    Basic usage
+  </h3>
+
+  <section>
+    <app-toggle-button-group-example-i></app-toggle-button-group-example-i>
+  </section>
+
+  <section>
+    <markdown src="/assets/toggle-button-group-example-i.md"></markdown>
+  </section>
+
+  <h3 id="toggle-button-group-example-ii">
+    Direction
+  </h3>
+
+  <section>
+    <app-toggle-button-group-example-ii></app-toggle-button-group-example-ii>
+  </section>
+
+  <section>
+    <markdown src="/assets/toggle-button-group-example-ii.md"></markdown>
+  </section>
+</div>
+
+<footer class="app-usage-footer spl-flex spl-flex-center spl-fs-xs spl-p-24">
+  ⓒ 2023. tk2rush90. All rights reserved.
+</footer>

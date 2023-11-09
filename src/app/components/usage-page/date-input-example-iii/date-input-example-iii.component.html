@@ -1,0 +1,19 @@
+<spl-date-input
+  #dateInputValidator="controlValidator"
+  [formControl]="formControl"
+  [minDate]="minDate"
+  [maxDate]="maxDate"
+  placeholder="YYYY-MM-DD"
+  splControlValidator></spl-date-input>
+
+<div
+  *ngIf="dateInputValidator.invalid"
+  class="spl-fs-s spl-mt-4">
+  <ng-container *ngIf="dateInputValidator.hasError('minDate')">
+    Date smaller than minDate is not allowed.
+  </ng-container>
+
+  <ng-container *ngIf="dateInputValidator.hasError('maxDate')">
+    Date bigger than maxDate is not allowed.
+  </ng-container>
+</div>

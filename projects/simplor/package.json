@@ -1,0 +1,29 @@
+{
+  "name": "@favian/simplor",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^16.1.0",
+    "@angular/core": "^16.1.0",
+    "material-symbols": "^0.13.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "author": {
+    "name": "tk2rush90",
+    "email": "tk2rush90@gmail.com"
+  },
+  "description": "Favian Simplor is a UI Kit consisting of basic components for creating a design system.",
+  "keywords": [
+    "Angular",
+    "Design System",
+    "Favian",
+    "UI",
+    "UI Kit"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

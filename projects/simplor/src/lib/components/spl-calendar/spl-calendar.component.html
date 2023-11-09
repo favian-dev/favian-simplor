@@ -1,0 +1,57 @@
+<div class="spl-calendar-header">
+  <div class="spl-calendar-date">
+    {{displayDate | date: yearMonthFormat: dateFormatTimezone}}
+  </div>
+
+  <div class="spl-calendar-buttons">
+    <button
+      (click)="toPreviousMonth()"
+      class="spl-icon-button"
+      splButton>
+      <spl-icon weight="200">chevron_left</spl-icon>
+    </button>
+
+    <button
+      (click)="toToday()"
+      splButton>
+      {{todayButtonLabel}}
+    </button>
+
+    <button
+      (click)="toNextMonth()"
+      class="spl-icon-button"
+      splButton>
+      <spl-icon weight="200">chevron_right</spl-icon>
+    </button>
+  </div>
+</div>
+
+<div class="spl-horizontal-line"></div>
+
+<div class="spl-calendar-day-of-week">
+  <div
+    *ngFor="let item of dayOfWeeks"
+    class="spl-calendar-date">
+    {{item | date: dayOfWeekFormat: dateFormatTimezone}}
+  </div>
+</div>
+
+<div class="spl-calendar-dates">
+  <div
+    *ngFor="let item of dates; trackBy: trackByFn"
+    [class.spl-out-of-calendar]="isOutOfCalendar(item) || isLessThanMinDate(item) || isMoreThanMaxDate(item)"
+    [class.spl-selected]="isSelectedDate(item)"
+    [class.spl-today]="isToday(item)"
+    [class.spl-ranged]="isRangedDate(item)"
+    [class.spl-start-date]="isStartDate(item)"
+    [class.spl-end-date]="isEndDate(item)"
+    class="spl-calendar-date">
+    <button
+      (click)="onDateClick(item)"
+      [disabled]="isLessThanMinDate(item) || isMoreThanMaxDate(item)"
+      class="spl-icon-button"
+      splButton>
+      {{item | date: dateFormat: dateFormatTimezone}}
+    </button>
+  </div>
+</div>

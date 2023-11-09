@@ -1,0 +1,35 @@
+<button
+  (click)="move(0)"
+  splStrokeButton>
+  To tab 1
+</button>
+
+<button
+  (click)="move(2)"
+  splStrokeButton>
+  To tab 3
+</button>
+
+<spl-tab-group #animateTabGroup>
+  <spl-tab *ngFor="let tab of tabs">
+    <ng-template splTabLabel>
+      Tab {{tab}}
+    </ng-template>
+
+    <ng-template splTabContent>
+      Tab content {{tab}}
+    </ng-template>
+  </spl-tab>
+</spl-tab-group>
+
+<spl-tab-group #instantTabGroup>
+  <spl-tab *ngFor="let tab of tabs">
+    <ng-template splTabLabel>
+      Tab {{tab}}
+    </ng-template>
+
+    <ng-template splTabContent>
+      Tab content {{tab}}
+    </ng-template>
+  </spl-tab>
+</spl-tab-group>

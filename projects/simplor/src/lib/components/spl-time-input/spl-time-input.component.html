@@ -1,0 +1,42 @@
+<div class="spl-time-input-wrapper">
+  <input
+    #hoursInput
+    (input)="onHoursChange($event)"
+    (focus)="onElementFocus($event)"
+    (blur)="onElementBlur($event)"
+    [ngModel]="hours"
+    [disabled]="disabled"
+    splInput/>
+
+  <div class="spl-time-input-separator">:</div>
+
+  <input
+    #minutesInput
+    (input)="onMinutesChange($event)"
+    (focus)="onElementFocus($event)"
+    (blur)="onElementBlur($event)"
+    [ngModel]="minutes"
+    [disabled]="disabled"
+    splInput/>
+</div>
+
+<spl-toggle-button-group
+  (ngModelChange)="onBeforeNoonChange($event)"
+  *ngIf="!use24Horus"
+  [ngModel]="beforeNoon"
+  [disabled]="disabled"
+  direction="vertical">
+  <spl-toggle-button
+    (focus)="onElementFocus($event)"
+    (blur)="onElementBlur($event)"
+    [value]="true">
+    {{amLabel}}
+  </spl-toggle-button>
+
+  <spl-toggle-button
+    (focus)="onElementFocus($event)"
+    (blur)="onElementBlur($event)"
+    [value]="false">
+    {{pmLabel}}
+  </spl-toggle-button>
+</spl-toggle-button-group>

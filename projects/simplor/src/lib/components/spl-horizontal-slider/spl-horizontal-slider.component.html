@@ -1,0 +1,23 @@
+<button
+  (click)="toScrollLeft()"
+  *ngIf="showLeftButton"
+  class="spl-icon-button spl-horizontal-slider-button spl-left"
+  splButton>
+  <spl-icon>chevron_left</spl-icon>
+</button>
+
+<div
+  #scrollContainer
+  (scroll)="onScroll($event)"
+  (scrollend)="onScrollEnd($event)"
+  class="spl-horizontal-slider-wrapper">
+  <ng-content></ng-content>
+</div>
+
+<button
+  (click)="toScrollRight()"
+  *ngIf="showRightButton"
+  class="spl-icon-button spl-horizontal-slider-button spl-right"
+  splButton>
+  <spl-icon>chevron_right</spl-icon>
+</button>

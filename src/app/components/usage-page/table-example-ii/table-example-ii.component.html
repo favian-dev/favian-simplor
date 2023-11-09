@@ -1,0 +1,41 @@
+<table
+  (sortChange)="onSortChange($event)"
+  [sort]="sort"
+  splTable>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+
+      <th
+        name="sold"
+        splSortableColumn>
+        Sold
+      </th>
+
+      <th
+        name="remaining"
+        allowNoneDirection
+        splSortableColumn>
+        Remaining
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of sortedData">
+      <td>
+        {{item.name}}
+      </td>
+
+      <td>
+        {{item.sold}}
+      </td>
+
+      <td>
+        {{item.remaining}}
+      </td>
+    </tr>
+  </tbody>
+</table>

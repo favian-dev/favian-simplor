@@ -1,0 +1,14 @@
+<div
+  *ngFor="let theme of themes"
+  [theme]="theme"
+  class="box"
+  splEffect>
+  {{theme | titlecase}}
+</div>
+
+<div
+  class="box"
+  disableEffect
+  splEffect>
+  Disabled
+</div>

@@ -1,0 +1,825 @@
+@use "sass:map";
+
+@import "material-symbols";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/**
+ * Get value for $key in $map, or get $default value.
+ *
+ * @param $map
+ * @param $key
+ * @param $default
+ */
+@function get-or-default($map, $key, $default) {
+  $value: map.get($map, $key);
+
+  @if ($value == null) {
+    @return $default;
+  } @else {
+    @return $value;
+  }
+}
+
+@function get-brightness($color) {
+  $r: red($color) / 255;
+  $g: green($color) / 255;
+  $b: blue($color) / 255;
+
+  // Calculate perceived brightness using the YIQ formula
+  $brightness: ($r * 0.299) + ($g * 0.587) + ($b * 0.114);
+
+  @return $brightness;
+}
+
+@mixin colors($options: (
+  primary: #006AE5, // Primary color.
+  secondary: #373538, // Secondary color.
+  tertiary: #0D6986, // Tertiary color.
+  warn: #FFC42C, // Warning color.
+  error: #E51C00, // Error color.
+  success: #19CF57, // Success color.
+  light-background: #fff, // Background for light theme.
+  light-foreground: #333, // Foreground for light theme.
+  dark-background: #444, // Background for dark theme.
+  dark-foreground: #ccc, // Foreground for dark theme.
+)) {
+  $primary: get-or-default($options, 'primary', #006AE5);
+  $secondary: get-or-default($options, 'secondary', #373538);
+  $tertiary: get-or-default($options, 'tertiary', #0D6986);
+  $tertiary: get-or-default($options, 'tertiary', #0D6986);
+  $warn: get-or-default($options, 'warn', #0D6986);
+  $error: get-or-default($options, 'error', #0D6986);
+  $success: get-or-default($options, 'success', #0D6986);
+  $light-background: get-or-default($options, 'light-background', #fff);
+  $light-foreground: get-or-default($options, 'light-foreground', #333);
+  $dark-background: get-or-default($options, 'dark-background', #444);
+  $dark-foreground: get-or-default($options, 'dark-foreground', #ccc);
+  $black: #000;
+  $white: #fff;
+
+  :root { // For autocompletion, do not use sass statements.
+    --primary-100: #{rgba($primary, 1)};
+    --primary-95: #{rgba($primary, .95)};
+    --primary-90: #{rgba($primary, .90)};
+    --primary-85: #{rgba($primary, .85)};
+    --primary-80: #{rgba($primary, .80)};
+    --primary-75: #{rgba($primary, .75)};
+    --primary-70: #{rgba($primary, .70)};
+    --primary-65: #{rgba($primary, .65)};
+    --primary-60: #{rgba($primary, .60)};
+    --primary-55: #{rgba($primary, .55)};
+    --primary-50: #{rgba($primary, .50)};
+    --primary-45: #{rgba($primary, .45)};
+    --primary-40: #{rgba($primary, .40)};
+    --primary-35: #{rgba($primary, .35)};
+    --primary-30: #{rgba($primary, .30)};
+    --primary-25: #{rgba($primary, .25)};
+    --primary-20: #{rgba($primary, .20)};
+    --primary-15: #{rgba($primary, .15)};
+    --primary-10: #{rgba($primary, .10)};
+    --primary-5: #{rgba($primary, .05)};
+    --primary-3: #{rgba($primary, .03)};
+
+    $primary-contrast: #fff;
+
+    @if (get-brightness($primary) > .5) {
+      $primary-contrast: #000;
+    }
+
+    --primary-contrast-100: #{rgba($primary-contrast, 1)};
+    --primary-contrast-95: #{rgba($primary-contrast, .95)};
+    --primary-contrast-90: #{rgba($primary-contrast, .90)};
+    --primary-contrast-85: #{rgba($primary-contrast, .85)};
+    --primary-contrast-80: #{rgba($primary-contrast, .80)};
+    --primary-contrast-75: #{rgba($primary-contrast, .75)};
+    --primary-contrast-70: #{rgba($primary-contrast, .70)};
+    --primary-contrast-65: #{rgba($primary-contrast, .65)};
+    --primary-contrast-60: #{rgba($primary-contrast, .60)};
+    --primary-contrast-55: #{rgba($primary-contrast, .55)};
+    --primary-contrast-50: #{rgba($primary-contrast, .50)};
+    --primary-contrast-45: #{rgba($primary-contrast, .45)};
+    --primary-contrast-40: #{rgba($primary-contrast, .40)};
+    --primary-contrast-35: #{rgba($primary-contrast, .35)};
+    --primary-contrast-30: #{rgba($primary-contrast, .30)};
+    --primary-contrast-25: #{rgba($primary-contrast, .25)};
+    --primary-contrast-20: #{rgba($primary-contrast, .20)};
+    --primary-contrast-15: #{rgba($primary-contrast, .15)};
+    --primary-contrast-10: #{rgba($primary-contrast, .10)};
+    --primary-contrast-5: #{rgba($primary-contrast, .05)};
+    --primary-contrast-3: #{rgba($primary-contrast, .03)};
+
+    --secondary-100: #{rgba($secondary, 1)};
+    --secondary-95: #{rgba($secondary, .95)};
+    --secondary-90: #{rgba($secondary, .90)};
+    --secondary-85: #{rgba($secondary, .85)};
+    --secondary-80: #{rgba($secondary, .80)};
+    --secondary-75: #{rgba($secondary, .75)};
+    --secondary-70: #{rgba($secondary, .70)};
+    --secondary-65: #{rgba($secondary, .65)};
+    --secondary-60: #{rgba($secondary, .60)};
+    --secondary-55: #{rgba($secondary, .55)};
+    --secondary-50: #{rgba($secondary, .50)};
+    --secondary-45: #{rgba($secondary, .45)};
+    --secondary-40: #{rgba($secondary, .40)};
+    --secondary-35: #{rgba($secondary, .35)};
+    --secondary-30: #{rgba($secondary, .30)};
+    --secondary-25: #{rgba($secondary, .25)};
+    --secondary-20: #{rgba($secondary, .20)};
+    --secondary-15: #{rgba($secondary, .15)};
+    --secondary-10: #{rgba($secondary, .10)};
+    --secondary-5: #{rgba($secondary, .05)};
+    --secondary-3: #{rgba($secondary, .03)};
+
+    $secondary-contrast: #fff;
+
+    @if (get-brightness($secondary) > .5) {
+      $secondary-contrast: #000;
+    }
+
+    --secondary-contrast-100: #{rgba($secondary-contrast, 1)};
+    --secondary-contrast-95: #{rgba($secondary-contrast, .95)};
+    --secondary-contrast-90: #{rgba($secondary-contrast, .90)};
+    --secondary-contrast-85: #{rgba($secondary-contrast, .85)};
+    --secondary-contrast-80: #{rgba($secondary-contrast, .80)};
+    --secondary-contrast-75: #{rgba($secondary-contrast, .75)};
+    --secondary-contrast-70: #{rgba($secondary-contrast, .70)};
+    --secondary-contrast-65: #{rgba($secondary-contrast, .65)};
+    --secondary-contrast-60: #{rgba($secondary-contrast, .60)};
+    --secondary-contrast-55: #{rgba($secondary-contrast, .55)};
+    --secondary-contrast-50: #{rgba($secondary-contrast, .50)};
+    --secondary-contrast-45: #{rgba($secondary-contrast, .45)};
+    --secondary-contrast-40: #{rgba($secondary-contrast, .40)};
+    --secondary-contrast-35: #{rgba($secondary-contrast, .35)};
+    --secondary-contrast-30: #{rgba($secondary-contrast, .30)};
+    --secondary-contrast-25: #{rgba($secondary-contrast, .25)};
+    --secondary-contrast-20: #{rgba($secondary-contrast, .20)};
+    --secondary-contrast-15: #{rgba($secondary-contrast, .15)};
+    --secondary-contrast-10: #{rgba($secondary-contrast, .10)};
+    --secondary-contrast-5: #{rgba($secondary-contrast, .05)};
+    --secondary-contrast-3: #{rgba($secondary-contrast, .03)};
+
+    --tertiary-100: #{rgba($tertiary, 1)};
+    --tertiary-95: #{rgba($tertiary, .95)};
+    --tertiary-90: #{rgba($tertiary, .90)};
+    --tertiary-85: #{rgba($tertiary, .85)};
+    --tertiary-80: #{rgba($tertiary, .80)};
+    --tertiary-75: #{rgba($tertiary, .75)};
+    --tertiary-70: #{rgba($tertiary, .70)};
+    --tertiary-65: #{rgba($tertiary, .65)};
+    --tertiary-60: #{rgba($tertiary, .60)};
+    --tertiary-55: #{rgba($tertiary, .55)};
+    --tertiary-50: #{rgba($tertiary, .50)};
+    --tertiary-45: #{rgba($tertiary, .45)};
+    --tertiary-40: #{rgba($tertiary, .40)};
+    --tertiary-35: #{rgba($tertiary, .35)};
+    --tertiary-30: #{rgba($tertiary, .30)};
+    --tertiary-25: #{rgba($tertiary, .25)};
+    --tertiary-20: #{rgba($tertiary, .20)};
+    --tertiary-15: #{rgba($tertiary, .15)};
+    --tertiary-10: #{rgba($tertiary, .10)};
+    --tertiary-5: #{rgba($tertiary, .05)};
+    --tertiary-3: #{rgba($tertiary, .03)};
+
+    $tertiary-contrast: #fff;
+
+    @if (get-brightness($tertiary) > .5) {
+      $tertiary-contrast: #000;
+    }
+
+    --tertiary-contrast-100: #{rgba($tertiary-contrast, 1)};
+    --tertiary-contrast-95: #{rgba($tertiary-contrast, .95)};
+    --tertiary-contrast-90: #{rgba($tertiary-contrast, .90)};
+    --tertiary-contrast-85: #{rgba($tertiary-contrast, .85)};
+    --tertiary-contrast-80: #{rgba($tertiary-contrast, .80)};
+    --tertiary-contrast-75: #{rgba($tertiary-contrast, .75)};
+    --tertiary-contrast-70: #{rgba($tertiary-contrast, .70)};
+    --tertiary-contrast-65: #{rgba($tertiary-contrast, .65)};
+    --tertiary-contrast-60: #{rgba($tertiary-contrast, .60)};
+    --tertiary-contrast-55: #{rgba($tertiary-contrast, .55)};
+    --tertiary-contrast-50: #{rgba($tertiary-contrast, .50)};
+    --tertiary-contrast-45: #{rgba($tertiary-contrast, .45)};
+    --tertiary-contrast-40: #{rgba($tertiary-contrast, .40)};
+    --tertiary-contrast-35: #{rgba($tertiary-contrast, .35)};
+    --tertiary-contrast-30: #{rgba($tertiary-contrast, .30)};
+    --tertiary-contrast-25: #{rgba($tertiary-contrast, .25)};
+    --tertiary-contrast-20: #{rgba($tertiary-contrast, .20)};
+    --tertiary-contrast-15: #{rgba($tertiary-contrast, .15)};
+    --tertiary-contrast-10: #{rgba($tertiary-contrast, .10)};
+    --tertiary-contrast-5: #{rgba($tertiary-contrast, .05)};
+    --tertiary-contrast-3: #{rgba($tertiary-contrast, .03)};
+
+    --warn-100: #{rgba($warn, 1)};
+    --warn-95: #{rgba($warn, .95)};
+    --warn-90: #{rgba($warn, .90)};
+    --warn-85: #{rgba($warn, .85)};
+    --warn-80: #{rgba($warn, .80)};
+    --warn-75: #{rgba($warn, .75)};
+    --warn-70: #{rgba($warn, .70)};
+    --warn-65: #{rgba($warn, .65)};
+    --warn-60: #{rgba($warn, .60)};
+    --warn-55: #{rgba($warn, .55)};
+    --warn-50: #{rgba($warn, .50)};
+    --warn-45: #{rgba($warn, .45)};
+    --warn-40: #{rgba($warn, .40)};
+    --warn-35: #{rgba($warn, .35)};
+    --warn-30: #{rgba($warn, .30)};
+    --warn-25: #{rgba($warn, .25)};
+    --warn-20: #{rgba($warn, .20)};
+    --warn-15: #{rgba($warn, .15)};
+    --warn-10: #{rgba($warn, .10)};
+    --warn-5: #{rgba($warn, .05)};
+    --warn-3: #{rgba($warn, .03)};
+
+    $warn-contrast: #fff;
+
+    @if (get-brightness($warn) > .5) {
+      $warn-contrast: #000;
+    }
+
+    --warn-contrast-100: #{rgba($warn-contrast, 1)};
+    --warn-contrast-95: #{rgba($warn-contrast, .95)};
+    --warn-contrast-90: #{rgba($warn-contrast, .90)};
+    --warn-contrast-85: #{rgba($warn-contrast, .85)};
+    --warn-contrast-80: #{rgba($warn-contrast, .80)};
+    --warn-contrast-75: #{rgba($warn-contrast, .75)};
+    --warn-contrast-70: #{rgba($warn-contrast, .70)};
+    --warn-contrast-65: #{rgba($warn-contrast, .65)};
+    --warn-contrast-60: #{rgba($warn-contrast, .60)};
+    --warn-contrast-55: #{rgba($warn-contrast, .55)};
+    --warn-contrast-50: #{rgba($warn-contrast, .50)};
+    --warn-contrast-45: #{rgba($warn-contrast, .45)};
+    --warn-contrast-40: #{rgba($warn-contrast, .40)};
+    --warn-contrast-35: #{rgba($warn-contrast, .35)};
+    --warn-contrast-30: #{rgba($warn-contrast, .30)};
+    --warn-contrast-25: #{rgba($warn-contrast, .25)};
+    --warn-contrast-20: #{rgba($warn-contrast, .20)};
+    --warn-contrast-15: #{rgba($warn-contrast, .15)};
+    --warn-contrast-10: #{rgba($warn-contrast, .10)};
+    --warn-contrast-5: #{rgba($warn-contrast, .05)};
+    --warn-contrast-3: #{rgba($warn-contrast, .03)};
+
+    --error-100: #{rgba($error, 1)};
+    --error-95: #{rgba($error, .95)};
+    --error-90: #{rgba($error, .90)};
+    --error-85: #{rgba($error, .85)};
+    --error-80: #{rgba($error, .80)};
+    --error-75: #{rgba($error, .75)};
+    --error-70: #{rgba($error, .70)};
+    --error-65: #{rgba($error, .65)};
+    --error-60: #{rgba($error, .60)};
+    --error-55: #{rgba($error, .55)};
+    --error-50: #{rgba($error, .50)};
+    --error-45: #{rgba($error, .45)};
+    --error-40: #{rgba($error, .40)};
+    --error-35: #{rgba($error, .35)};
+    --error-30: #{rgba($error, .30)};
+    --error-25: #{rgba($error, .25)};
+    --error-20: #{rgba($error, .20)};
+    --error-15: #{rgba($error, .15)};
+    --error-10: #{rgba($error, .10)};
+    --error-5: #{rgba($error, .05)};
+    --error-3: #{rgba($error, .03)};
+
+    $error-contrast: #fff;
+
+    @if (get-brightness($error) > .5) {
+      $error-contrast: #000;
+    }
+
+    --error-contrast-100: #{rgba($error-contrast, 1)};
+    --error-contrast-95: #{rgba($error-contrast, .95)};
+    --error-contrast-90: #{rgba($error-contrast, .90)};
+    --error-contrast-85: #{rgba($error-contrast, .85)};
+    --error-contrast-80: #{rgba($error-contrast, .80)};
+    --error-contrast-75: #{rgba($error-contrast, .75)};
+    --error-contrast-70: #{rgba($error-contrast, .70)};
+    --error-contrast-65: #{rgba($error-contrast, .65)};
+    --error-contrast-60: #{rgba($error-contrast, .60)};
+    --error-contrast-55: #{rgba($error-contrast, .55)};
+    --error-contrast-50: #{rgba($error-contrast, .50)};
+    --error-contrast-45: #{rgba($error-contrast, .45)};
+    --error-contrast-40: #{rgba($error-contrast, .40)};
+    --error-contrast-35: #{rgba($error-contrast, .35)};
+    --error-contrast-30: #{rgba($error-contrast, .30)};
+    --error-contrast-25: #{rgba($error-contrast, .25)};
+    --error-contrast-20: #{rgba($error-contrast, .20)};
+    --error-contrast-15: #{rgba($error-contrast, .15)};
+    --error-contrast-10: #{rgba($error-contrast, .10)};
+    --error-contrast-5: #{rgba($error-contrast, .05)};
+    --error-contrast-3: #{rgba($error-contrast, .03)};
+
+    --success-100: #{rgba($success, 1)};
+    --success-95: #{rgba($success, .95)};
+    --success-90: #{rgba($success, .90)};
+    --success-85: #{rgba($success, .85)};
+    --success-80: #{rgba($success, .80)};
+    --success-75: #{rgba($success, .75)};
+    --success-70: #{rgba($success, .70)};
+    --success-65: #{rgba($success, .65)};
+    --success-60: #{rgba($success, .60)};
+    --success-55: #{rgba($success, .55)};
+    --success-50: #{rgba($success, .50)};
+    --success-45: #{rgba($success, .45)};
+    --success-40: #{rgba($success, .40)};
+    --success-35: #{rgba($success, .35)};
+    --success-30: #{rgba($success, .30)};
+    --success-25: #{rgba($success, .25)};
+    --success-20: #{rgba($success, .20)};
+    --success-15: #{rgba($success, .15)};
+    --success-10: #{rgba($success, .10)};
+    --success-5: #{rgba($success, .05)};
+    --success-3: #{rgba($success, .03)};
+
+    $success-contrast: #fff;
+
+    @if (get-brightness($success) > .5) {
+      $success-contrast: #000;
+    }
+
+    --success-contrast-100: #{rgba($success-contrast, 1)};
+    --success-contrast-95: #{rgba($success-contrast, .95)};
+    --success-contrast-90: #{rgba($success-contrast, .90)};
+    --success-contrast-85: #{rgba($success-contrast, .85)};
+    --success-contrast-80: #{rgba($success-contrast, .80)};
+    --success-contrast-75: #{rgba($success-contrast, .75)};
+    --success-contrast-70: #{rgba($success-contrast, .70)};
+    --success-contrast-65: #{rgba($success-contrast, .65)};
+    --success-contrast-60: #{rgba($success-contrast, .60)};
+    --success-contrast-55: #{rgba($success-contrast, .55)};
+    --success-contrast-50: #{rgba($success-contrast, .50)};
+    --success-contrast-45: #{rgba($success-contrast, .45)};
+    --success-contrast-40: #{rgba($success-contrast, .40)};
+    --success-contrast-35: #{rgba($success-contrast, .35)};
+    --success-contrast-30: #{rgba($success-contrast, .30)};
+    --success-contrast-25: #{rgba($success-contrast, .25)};
+    --success-contrast-20: #{rgba($success-contrast, .20)};
+    --success-contrast-15: #{rgba($success-contrast, .15)};
+    --success-contrast-10: #{rgba($success-contrast, .10)};
+    --success-contrast-5: #{rgba($success-contrast, .05)};
+    --success-contrast-3: #{rgba($success-contrast, .03)};
+
+    --light-background-100: #{rgba($light-background, 1)};
+    --light-background-95: #{rgba($light-background, .95)};
+    --light-background-90: #{rgba($light-background, .90)};
+    --light-background-85: #{rgba($light-background, .85)};
+    --light-background-80: #{rgba($light-background, .80)};
+    --light-background-75: #{rgba($light-background, .75)};
+    --light-background-70: #{rgba($light-background, .70)};
+    --light-background-65: #{rgba($light-background, .65)};
+    --light-background-60: #{rgba($light-background, .60)};
+    --light-background-55: #{rgba($light-background, .55)};
+    --light-background-50: #{rgba($light-background, .50)};
+    --light-background-45: #{rgba($light-background, .45)};
+    --light-background-40: #{rgba($light-background, .40)};
+    --light-background-35: #{rgba($light-background, .35)};
+    --light-background-30: #{rgba($light-background, .30)};
+    --light-background-25: #{rgba($light-background, .25)};
+    --light-background-20: #{rgba($light-background, .20)};
+    --light-background-15: #{rgba($light-background, .15)};
+    --light-background-10: #{rgba($light-background, .10)};
+    --light-background-5: #{rgba($light-background, .05)};
+    --light-background-3: #{rgba($light-background, .03)};
+
+    --light-foreground-100: #{rgba($light-foreground, 1)};
+    --light-foreground-95: #{rgba($light-foreground, .95)};
+    --light-foreground-90: #{rgba($light-foreground, .90)};
+    --light-foreground-85: #{rgba($light-foreground, .85)};
+    --light-foreground-80: #{rgba($light-foreground, .80)};
+    --light-foreground-75: #{rgba($light-foreground, .75)};
+    --light-foreground-70: #{rgba($light-foreground, .70)};
+    --light-foreground-65: #{rgba($light-foreground, .65)};
+    --light-foreground-60: #{rgba($light-foreground, .60)};
+    --light-foreground-55: #{rgba($light-foreground, .55)};
+    --light-foreground-50: #{rgba($light-foreground, .50)};
+    --light-foreground-45: #{rgba($light-foreground, .45)};
+    --light-foreground-40: #{rgba($light-foreground, .40)};
+    --light-foreground-35: #{rgba($light-foreground, .35)};
+    --light-foreground-30: #{rgba($light-foreground, .30)};
+    --light-foreground-25: #{rgba($light-foreground, .25)};
+    --light-foreground-20: #{rgba($light-foreground, .20)};
+    --light-foreground-15: #{rgba($light-foreground, .15)};
+    --light-foreground-10: #{rgba($light-foreground, .10)};
+    --light-foreground-5: #{rgba($light-foreground, .05)};
+    --light-foreground-3: #{rgba($light-foreground, .03)};
+
+    --dark-background-100: #{rgba($dark-background, 1)};
+    --dark-background-95: #{rgba($dark-background, .95)};
+    --dark-background-90: #{rgba($dark-background, .90)};
+    --dark-background-85: #{rgba($dark-background, .85)};
+    --dark-background-80: #{rgba($dark-background, .80)};
+    --dark-background-75: #{rgba($dark-background, .75)};
+    --dark-background-70: #{rgba($dark-background, .70)};
+    --dark-background-65: #{rgba($dark-background, .65)};
+    --dark-background-60: #{rgba($dark-background, .60)};
+    --dark-background-55: #{rgba($dark-background, .55)};
+    --dark-background-50: #{rgba($dark-background, .50)};
+    --dark-background-45: #{rgba($dark-background, .45)};
+    --dark-background-40: #{rgba($dark-background, .40)};
+    --dark-background-35: #{rgba($dark-background, .35)};
+    --dark-background-30: #{rgba($dark-background, .30)};
+    --dark-background-25: #{rgba($dark-background, .25)};
+    --dark-background-20: #{rgba($dark-background, .20)};
+    --dark-background-15: #{rgba($dark-background, .15)};
+    --dark-background-10: #{rgba($dark-background, .10)};
+    --dark-background-5: #{rgba($dark-background, .05)};
+    --dark-background-3: #{rgba($dark-background, .03)};
+
+    --dark-foreground-100: #{rgba($dark-foreground, 1)};
+    --dark-foreground-95: #{rgba($dark-foreground, .95)};
+    --dark-foreground-90: #{rgba($dark-foreground, .90)};
+    --dark-foreground-85: #{rgba($dark-foreground, .85)};
+    --dark-foreground-80: #{rgba($dark-foreground, .80)};
+    --dark-foreground-75: #{rgba($dark-foreground, .75)};
+    --dark-foreground-70: #{rgba($dark-foreground, .70)};
+    --dark-foreground-65: #{rgba($dark-foreground, .65)};
+    --dark-foreground-60: #{rgba($dark-foreground, .60)};
+    --dark-foreground-55: #{rgba($dark-foreground, .55)};
+    --dark-foreground-50: #{rgba($dark-foreground, .50)};
+    --dark-foreground-45: #{rgba($dark-foreground, .45)};
+    --dark-foreground-40: #{rgba($dark-foreground, .40)};
+    --dark-foreground-35: #{rgba($dark-foreground, .35)};
+    --dark-foreground-30: #{rgba($dark-foreground, .30)};
+    --dark-foreground-25: #{rgba($dark-foreground, .25)};
+    --dark-foreground-20: #{rgba($dark-foreground, .20)};
+    --dark-foreground-15: #{rgba($dark-foreground, .15)};
+    --dark-foreground-10: #{rgba($dark-foreground, .10)};
+    --dark-foreground-5: #{rgba($dark-foreground, .05)};
+    --dark-foreground-3: #{rgba($dark-foreground, .03)};
+
+    --black-100: #{rgba($black, 1)};
+    --black-95: #{rgba($black, .95)};
+    --black-90: #{rgba($black, .90)};
+    --black-85: #{rgba($black, .85)};
+    --black-80: #{rgba($black, .80)};
+    --black-75: #{rgba($black, .75)};
+    --black-70: #{rgba($black, .70)};
+    --black-65: #{rgba($black, .65)};
+    --black-60: #{rgba($black, .60)};
+    --black-55: #{rgba($black, .55)};
+    --black-50: #{rgba($black, .50)};
+    --black-45: #{rgba($black, .45)};
+    --black-40: #{rgba($black, .40)};
+    --black-35: #{rgba($black, .35)};
+    --black-30: #{rgba($black, .30)};
+    --black-25: #{rgba($black, .25)};
+    --black-20: #{rgba($black, .20)};
+    --black-15: #{rgba($black, .15)};
+    --black-10: #{rgba($black, .10)};
+    --black-5: #{rgba($black, .05)};
+    --black-3: #{rgba($black, .03)};
+
+    --white-100: #{rgba($white, 1)};
+    --white-95: #{rgba($white, .95)};
+    --white-90: #{rgba($white, .90)};
+    --white-85: #{rgba($white, .85)};
+    --white-80: #{rgba($white, .80)};
+    --white-75: #{rgba($white, .75)};
+    --white-70: #{rgba($white, .70)};
+    --white-65: #{rgba($white, .65)};
+    --white-60: #{rgba($white, .60)};
+    --white-55: #{rgba($white, .55)};
+    --white-50: #{rgba($white, .50)};
+    --white-45: #{rgba($white, .45)};
+    --white-40: #{rgba($white, .40)};
+    --white-35: #{rgba($white, .35)};
+    --white-30: #{rgba($white, .30)};
+    --white-25: #{rgba($white, .25)};
+    --white-20: #{rgba($white, .20)};
+    --white-15: #{rgba($white, .15)};
+    --white-10: #{rgba($white, .10)};
+    --white-5: #{rgba($white, .05)};
+    --white-3: #{rgba($white, .03)};
+  }
+
+  .r-light-theme {
+    --background-100: #{rgba($light-background, 1)};
+    --background-95: #{rgba($light-background, .95)};
+    --background-90: #{rgba($light-background, .90)};
+    --background-85: #{rgba($light-background, .85)};
+    --background-80: #{rgba($light-background, .80)};
+    --background-75: #{rgba($light-background, .75)};
+    --background-70: #{rgba($light-background, .70)};
+    --background-65: #{rgba($light-background, .65)};
+    --background-60: #{rgba($light-background, .60)};
+    --background-55: #{rgba($light-background, .55)};
+    --background-50: #{rgba($light-background, .50)};
+    --background-45: #{rgba($light-background, .45)};
+    --background-40: #{rgba($light-background, .40)};
+    --background-35: #{rgba($light-background, .35)};
+    --background-30: #{rgba($light-background, .30)};
+    --background-25: #{rgba($light-background, .25)};
+    --background-20: #{rgba($light-background, .20)};
+    --background-15: #{rgba($light-background, .15)};
+    --background-10: #{rgba($light-background, .10)};
+    --background-5: #{rgba($light-background, .05)};
+    --background-3: #{rgba($light-background, .03)};
+
+    --foreground-100: #{rgba($light-foreground, 1)};
+    --foreground-95: #{rgba($light-foreground, .95)};
+    --foreground-90: #{rgba($light-foreground, .90)};
+    --foreground-85: #{rgba($light-foreground, .85)};
+    --foreground-80: #{rgba($light-foreground, .80)};
+    --foreground-75: #{rgba($light-foreground, .75)};
+    --foreground-70: #{rgba($light-foreground, .70)};
+    --foreground-65: #{rgba($light-foreground, .65)};
+    --foreground-60: #{rgba($light-foreground, .60)};
+    --foreground-55: #{rgba($light-foreground, .55)};
+    --foreground-50: #{rgba($light-foreground, .50)};
+    --foreground-45: #{rgba($light-foreground, .45)};
+    --foreground-40: #{rgba($light-foreground, .40)};
+    --foreground-35: #{rgba($light-foreground, .35)};
+    --foreground-30: #{rgba($light-foreground, .30)};
+    --foreground-25: #{rgba($light-foreground, .25)};
+    --foreground-20: #{rgba($light-foreground, .20)};
+    --foreground-15: #{rgba($light-foreground, .15)};
+    --foreground-10: #{rgba($light-foreground, .10)};
+    --foreground-5: #{rgba($light-foreground, .05)};
+    --foreground-3: #{rgba($light-foreground, .03)};
+
+    --contrast-100: #{rgba($black, 1)};
+    --contrast-95: #{rgba($black, .95)};
+    --contrast-90: #{rgba($black, .90)};
+    --contrast-85: #{rgba($black, .85)};
+    --contrast-80: #{rgba($black, .80)};
+    --contrast-75: #{rgba($black, .75)};
+    --contrast-70: #{rgba($black, .70)};
+    --contrast-65: #{rgba($black, .65)};
+    --contrast-60: #{rgba($black, .60)};
+    --contrast-55: #{rgba($black, .55)};
+    --contrast-50: #{rgba($black, .50)};
+    --contrast-45: #{rgba($black, .45)};
+    --contrast-40: #{rgba($black, .40)};
+    --contrast-35: #{rgba($black, .35)};
+    --contrast-30: #{rgba($black, .30)};
+    --contrast-25: #{rgba($black, .25)};
+    --contrast-20: #{rgba($black, .20)};
+    --contrast-15: #{rgba($black, .15)};
+    --contrast-10: #{rgba($black, .10)};
+    --contrast-5: #{rgba($black, .05)};
+    --contrast-3: #{rgba($black, .03)};
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --background-100: #{rgba($light-background, 1)};
+      --background-95: #{rgba($light-background, .95)};
+      --background-90: #{rgba($light-background, .90)};
+      --background-85: #{rgba($light-background, .85)};
+      --background-80: #{rgba($light-background, .80)};
+      --background-75: #{rgba($light-background, .75)};
+      --background-70: #{rgba($light-background, .70)};
+      --background-65: #{rgba($light-background, .65)};
+      --background-60: #{rgba($light-background, .60)};
+      --background-55: #{rgba($light-background, .55)};
+      --background-50: #{rgba($light-background, .50)};
+      --background-45: #{rgba($light-background, .45)};
+      --background-40: #{rgba($light-background, .40)};
+      --background-35: #{rgba($light-background, .35)};
+      --background-30: #{rgba($light-background, .30)};
+      --background-25: #{rgba($light-background, .25)};
+      --background-20: #{rgba($light-background, .20)};
+      --background-15: #{rgba($light-background, .15)};
+      --background-10: #{rgba($light-background, .10)};
+      --background-5: #{rgba($light-background, .05)};
+      --background-3: #{rgba($light-background, .03)};
+
+      --foreground-100: #{rgba($light-foreground, 1)};
+      --foreground-95: #{rgba($light-foreground, .95)};
+      --foreground-90: #{rgba($light-foreground, .90)};
+      --foreground-85: #{rgba($light-foreground, .85)};
+      --foreground-80: #{rgba($light-foreground, .80)};
+      --foreground-75: #{rgba($light-foreground, .75)};
+      --foreground-70: #{rgba($light-foreground, .70)};
+      --foreground-65: #{rgba($light-foreground, .65)};
+      --foreground-60: #{rgba($light-foreground, .60)};
+      --foreground-55: #{rgba($light-foreground, .55)};
+      --foreground-50: #{rgba($light-foreground, .50)};
+      --foreground-45: #{rgba($light-foreground, .45)};
+      --foreground-40: #{rgba($light-foreground, .40)};
+      --foreground-35: #{rgba($light-foreground, .35)};
+      --foreground-30: #{rgba($light-foreground, .30)};
+      --foreground-25: #{rgba($light-foreground, .25)};
+      --foreground-20: #{rgba($light-foreground, .20)};
+      --foreground-15: #{rgba($light-foreground, .15)};
+      --foreground-10: #{rgba($light-foreground, .10)};
+      --foreground-5: #{rgba($light-foreground, .05)};
+      --foreground-3: #{rgba($light-foreground, .03)};
+
+      --contrast-100: #{rgba($black, 1)};
+      --contrast-95: #{rgba($black, .95)};
+      --contrast-90: #{rgba($black, .90)};
+      --contrast-85: #{rgba($black, .85)};
+      --contrast-80: #{rgba($black, .80)};
+      --contrast-75: #{rgba($black, .75)};
+      --contrast-70: #{rgba($black, .70)};
+      --contrast-65: #{rgba($black, .65)};
+      --contrast-60: #{rgba($black, .60)};
+      --contrast-55: #{rgba($black, .55)};
+      --contrast-50: #{rgba($black, .50)};
+      --contrast-45: #{rgba($black, .45)};
+      --contrast-40: #{rgba($black, .40)};
+      --contrast-35: #{rgba($black, .35)};
+      --contrast-30: #{rgba($black, .30)};
+      --contrast-25: #{rgba($black, .25)};
+      --contrast-20: #{rgba($black, .20)};
+      --contrast-15: #{rgba($black, .15)};
+      --contrast-10: #{rgba($black, .10)};
+      --contrast-5: #{rgba($black, .05)};
+      --contrast-3: #{rgba($black, .03)};
+    }
+  }
+
+  .r-dark-theme {
+    --background-100: #{rgba($dark-background, 1)};
+    --background-95: #{rgba($dark-background, .95)};
+    --background-90: #{rgba($dark-background, .90)};
+    --background-85: #{rgba($dark-background, .85)};
+    --background-80: #{rgba($dark-background, .80)};
+    --background-75: #{rgba($dark-background, .75)};
+    --background-70: #{rgba($dark-background, .70)};
+    --background-65: #{rgba($dark-background, .65)};
+    --background-60: #{rgba($dark-background, .60)};
+    --background-55: #{rgba($dark-background, .55)};
+    --background-50: #{rgba($dark-background, .50)};
+    --background-45: #{rgba($dark-background, .45)};
+    --background-40: #{rgba($dark-background, .40)};
+    --background-35: #{rgba($dark-background, .35)};
+    --background-30: #{rgba($dark-background, .30)};
+    --background-25: #{rgba($dark-background, .25)};
+    --background-20: #{rgba($dark-background, .20)};
+    --background-15: #{rgba($dark-background, .15)};
+    --background-10: #{rgba($dark-background, .10)};
+    --background-5: #{rgba($dark-background, .05)};
+    --background-3: #{rgba($dark-background, .03)};
+
+    --foreground-100: #{rgba($dark-foreground, 1)};
+    --foreground-95: #{rgba($dark-foreground, .95)};
+    --foreground-90: #{rgba($dark-foreground, .90)};
+    --foreground-85: #{rgba($dark-foreground, .85)};
+    --foreground-80: #{rgba($dark-foreground, .80)};
+    --foreground-75: #{rgba($dark-foreground, .75)};
+    --foreground-70: #{rgba($dark-foreground, .70)};
+    --foreground-65: #{rgba($dark-foreground, .65)};
+    --foreground-60: #{rgba($dark-foreground, .60)};
+    --foreground-55: #{rgba($dark-foreground, .55)};
+    --foreground-50: #{rgba($dark-foreground, .50)};
+    --foreground-45: #{rgba($dark-foreground, .45)};
+    --foreground-40: #{rgba($dark-foreground, .40)};
+    --foreground-35: #{rgba($dark-foreground, .35)};
+    --foreground-30: #{rgba($dark-foreground, .30)};
+    --foreground-25: #{rgba($dark-foreground, .25)};
+    --foreground-20: #{rgba($dark-foreground, .20)};
+    --foreground-15: #{rgba($dark-foreground, .15)};
+    --foreground-10: #{rgba($dark-foreground, .10)};
+    --foreground-5: #{rgba($dark-foreground, .05)};
+    --foreground-3: #{rgba($dark-foreground, .03)};
+
+    --contrast-100: #{rgba($white, 1)};
+    --contrast-95: #{rgba($white, .95)};
+    --contrast-90: #{rgba($white, .90)};
+    --contrast-85: #{rgba($white, .85)};
+    --contrast-80: #{rgba($white, .80)};
+    --contrast-75: #{rgba($white, .75)};
+    --contrast-70: #{rgba($white, .70)};
+    --contrast-65: #{rgba($white, .65)};
+    --contrast-60: #{rgba($white, .60)};
+    --contrast-55: #{rgba($white, .55)};
+    --contrast-50: #{rgba($white, .50)};
+    --contrast-45: #{rgba($white, .45)};
+    --contrast-40: #{rgba($white, .40)};
+    --contrast-35: #{rgba($white, .35)};
+    --contrast-30: #{rgba($white, .30)};
+    --contrast-25: #{rgba($white, .25)};
+    --contrast-20: #{rgba($white, .20)};
+    --contrast-15: #{rgba($white, .15)};
+    --contrast-10: #{rgba($white, .10)};
+    --contrast-5: #{rgba($white, .05)};
+    --contrast-3: #{rgba($white, .03)};
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background-100: #{rgba($dark-background, 1)};
+      --background-95: #{rgba($dark-background, .95)};
+      --background-90: #{rgba($dark-background, .90)};
+      --background-85: #{rgba($dark-background, .85)};
+      --background-80: #{rgba($dark-background, .80)};
+      --background-75: #{rgba($dark-background, .75)};
+      --background-70: #{rgba($dark-background, .70)};
+      --background-65: #{rgba($dark-background, .65)};
+      --background-60: #{rgba($dark-background, .60)};
+      --background-55: #{rgba($dark-background, .55)};
+      --background-50: #{rgba($dark-background, .50)};
+      --background-45: #{rgba($dark-background, .45)};
+      --background-40: #{rgba($dark-background, .40)};
+      --background-35: #{rgba($dark-background, .35)};
+      --background-30: #{rgba($dark-background, .30)};
+      --background-25: #{rgba($dark-background, .25)};
+      --background-20: #{rgba($dark-background, .20)};
+      --background-15: #{rgba($dark-background, .15)};
+      --background-10: #{rgba($dark-background, .10)};
+      --background-5: #{rgba($dark-background, .05)};
+      --background-3: #{rgba($dark-background, .03)};
+
+      --foreground-100: #{rgba($dark-foreground, 1)};
+      --foreground-95: #{rgba($dark-foreground, .95)};
+      --foreground-90: #{rgba($dark-foreground, .90)};
+      --foreground-85: #{rgba($dark-foreground, .85)};
+      --foreground-80: #{rgba($dark-foreground, .80)};
+      --foreground-75: #{rgba($dark-foreground, .75)};
+      --foreground-70: #{rgba($dark-foreground, .70)};
+      --foreground-65: #{rgba($dark-foreground, .65)};
+      --foreground-60: #{rgba($dark-foreground, .60)};
+      --foreground-55: #{rgba($dark-foreground, .55)};
+      --foreground-50: #{rgba($dark-foreground, .50)};
+      --foreground-45: #{rgba($dark-foreground, .45)};
+      --foreground-40: #{rgba($dark-foreground, .40)};
+      --foreground-35: #{rgba($dark-foreground, .35)};
+      --foreground-30: #{rgba($dark-foreground, .30)};
+      --foreground-25: #{rgba($dark-foreground, .25)};
+      --foreground-20: #{rgba($dark-foreground, .20)};
+      --foreground-15: #{rgba($dark-foreground, .15)};
+      --foreground-10: #{rgba($dark-foreground, .10)};
+      --foreground-5: #{rgba($dark-foreground, .05)};
+      --foreground-3: #{rgba($dark-foreground, .03)};
+
+      --contrast-100: #{rgba($white, 1)};
+      --contrast-95: #{rgba($white, .95)};
+      --contrast-90: #{rgba($white, .90)};
+      --contrast-85: #{rgba($white, .85)};
+      --contrast-80: #{rgba($white, .80)};
+      --contrast-75: #{rgba($white, .75)};
+      --contrast-70: #{rgba($white, .70)};
+      --contrast-65: #{rgba($white, .65)};
+      --contrast-60: #{rgba($white, .60)};
+      --contrast-55: #{rgba($white, .55)};
+      --contrast-50: #{rgba($white, .50)};
+      --contrast-45: #{rgba($white, .45)};
+      --contrast-40: #{rgba($white, .40)};
+      --contrast-35: #{rgba($white, .35)};
+      --contrast-30: #{rgba($white, .30)};
+      --contrast-25: #{rgba($white, .25)};
+      --contrast-20: #{rgba($white, .20)};
+      --contrast-15: #{rgba($white, .15)};
+      --contrast-10: #{rgba($white, .10)};
+      --contrast-5: #{rgba($white, .05)};
+      --contrast-3: #{rgba($white, .03)};
+    }
+  }
+}
+
+@mixin durations($options: (
+  very-slow: 1.5s,
+  slow: 1s,
+  normal: .5s,
+  fast: .3s,
+  very-fast: .15s,
+)) {
+  :root {
+    --duration-very-slow: #{get-or-default($options, 'very-slow', 1.5s)};
+    --duration-slow: #{get-or-default($options, 'slow', 1s)};
+    --duration-normal: #{get-or-default($options, 'medium', .5s)};
+    --duration-fast: #{get-or-default($options, 'fast', .3s)};
+    --duration-very-fast: #{get-or-default($options, 'very-fast', .15s)};
+  }
+}
+
+@mixin font-sizes($options: (
+  xs: 12px,
+  s: 14px,
+  m: 16px,
+  l: 18px,
+  xl: 20px,
+)) {
+  :root {
+    --font-size-xs: #{get-or-default($options, 'xs', 12px)};
+    --font-size-s: #{get-or-default($options, 's', 14px)};
+    --font-size-m: #{get-or-default($options, 'm', 16px)};
+    --font-size-l: #{get-or-default($options, 'l', 18px)};
+    --font-size-xl: #{get-or-default($options, 'xl', 20px)};
+  }
+}
+
+:root {
+  --border-color: var(--foreground-15);
+  --focus-border-color: var(--primary-100);
+  --focus-background-color: var(--primary-5);
+  --error-border-color: var(--error-100);
+  --error-background-color: var(--error-5);
+  --placeholder-color: var(--foreground-60);
+  --disabled-placeholder-color: var(--foreground-40);
+  --disabled-foreground-color: var(--foreground-60);
+  --disabled-background-color: var(--contrast-5);
+  --active-disabled-foreground-color: var(--foreground-80);
+  --active-disabled-background-color: var(--contrast-25);
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 16px;
+  --space-l: 24px;
+  --space-xl: 32px;
+  --control-height-xs: 32px;
+  --control-height-s: 40px;
+  --control-height-m: 48px;
+  --control-height-l: 56px;
+  --control-height-lx: 64px;
+}

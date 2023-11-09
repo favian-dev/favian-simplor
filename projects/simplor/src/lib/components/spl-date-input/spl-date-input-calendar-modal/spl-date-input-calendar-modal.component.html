@@ -1,0 +1,15 @@
+<spl-calendar
+  [(value)]="selectedDate"
+  [minDate]="minDate"
+  [maxDate]="maxDate"
+  [displayYear]="displayYear"
+  [displayMonth]="displayMonth"></spl-calendar>
+
+<spl-modal-actions>
+  <button
+    (click)="close(selectedDate)"
+    splStrokeButton
+    splModalAction>
+    {{modalConfirmLabel}}
+  </button>
+</spl-modal-actions>

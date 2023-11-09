@@ -1,0 +1,33 @@
+<table splTable>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+
+      <th>
+        Sold
+      </th>
+
+      <th>
+        Remaining
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of data">
+      <td>
+        {{item.name}}
+      </td>
+
+      <td>
+        {{item.sold}}
+      </td>
+
+      <td>
+        {{item.remaining}}
+      </td>
+    </tr>
+  </tbody>
+</table>

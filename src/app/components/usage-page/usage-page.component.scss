@@ -1,0 +1,186 @@
+@import "projects/simplor/src/styles/styles";
+
+.app-usage-page {
+  display: block;
+
+  .app-usage-header, .app-usage-sidebar {
+    position: fixed;
+    background-color: var(--background-100);
+    box-sizing: border-box;
+    z-index: 10;
+  }
+
+  .app-usage-header {
+    top: 0;
+    height: 56px;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid var(--border-color);
+
+    h1 {
+      font-weight: 400;
+    }
+
+    .app-menu-button {
+      all: unset;
+      display: none;
+      @extend .spl-clickable;
+
+      spl-icon {
+        display: block;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .app-usage-sidebar {
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    width: 260px;
+    border-right: 1px solid var(--border-color);
+    overflow: auto;
+    transition: transform var(--duration-very-fast);
+
+    ul {
+      list-style-position: inside;
+      list-style-type: none;
+
+      li {
+        font-size: var(--font-size-s);
+
+        a {
+          color: var(--foreground-75);
+          text-decoration: none;
+          display: block;
+
+          &.app-highlighted {
+            color: var(--primary-100);
+            font-weight: 700;
+          }
+        }
+      }
+
+      ul {
+        padding-left: 16px;
+      }
+    }
+  }
+
+  .app-usage-content {
+    display: block;
+    box-sizing: border-box;
+    padding: 56px 24px 24px;
+    max-width: 1024px;
+    margin: 0 auto;
+
+    markdown {
+      p, li {
+        line-height: 1.8;
+        font-size: var(--font-size-s);
+      }
+
+      ul, ol {
+        list-style-position: inside;
+        margin: 24px 0;
+
+        li::marker {
+          margin-right: 8px;
+        }
+      }
+
+      code:not([class*="language-"]) {
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        color: var(--primary-100);
+        background-color: var(--primary-5);
+        padding: 4px 6px;
+        border-radius: 2px;
+        font-size: .9em;
+      }
+
+      code[class*="language-"], pre[class*="language-"] {
+        font-size: .9em;
+      }
+
+      pre[class*="language-"] {
+        margin: 24px 0;
+      }
+    }
+
+    h1, h2, h3 {
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+      color: var(--primary-100);
+
+      &::before {
+        content: '#';
+        color: var(--primary-50);
+      }
+    }
+
+    h1 {
+      margin: 48px 0 32px;
+    }
+
+    h2 {
+      margin: 40px 0 24px;
+      filter: brightness(.8);
+    }
+
+    h3 {
+      margin: 32px 0 16px;
+      filter: brightness(.6);
+    }
+
+    h2, h3 {
+      font-weight: 400;
+    }
+
+    section {
+      margin: var(--space-m) 0;
+
+      spl-form-field, spl-date-input {
+        max-width: 100%;
+      }
+    }
+
+    input, spl-form-field, spl-select, textarea, spl-time-input {
+      max-width: 100%;
+    }
+  }
+
+  .app-usage-footer {
+    border-top: 1px solid var(--border-color);
+    box-sizing: border-box;
+    background-color: var(--contrast-5);
+    color: var(--contrast-75);
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .app-usage-page {
+    padding-left: 260px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .app-usage-page {
+    padding-left: 0;
+
+    .app-usage-header {
+      .app-menu-button {
+        display: block;
+        margin-right: 8px;
+      }
+    }
+
+    .app-usage-sidebar {
+      transform: translateX(-100%);
+
+      &.app-usage-sidebar-opened {
+        transform: translateX(0);
+      }
+    }
+  }
+}

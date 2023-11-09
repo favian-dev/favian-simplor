@@ -1,0 +1,15 @@
+<spl-calendar
+  [(displayYear)]="displayYear"
+  [(displayMonth)]="displayMonth"></spl-calendar>
+
+<button
+  (click)="toDisplayDate(2000, 0)"
+  splStrokeButton>
+  To Jan, 2000
+</button>
+
+<button
+  (click)="toDisplayDate(1990, 0)"
+  splStrokeButton>
+  To Jan, 1990
+</button>

@@ -3,11 +3,12 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "favian-reactive": {
+    "favian-simplor": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "standalone": true
         }
       },
       "root": "",
@@ -17,7 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/favian-reactive",
+            "outputPath": "dist/favian-simplor",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -30,24 +31,26 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/prismjs/themes/prism.css"
             ],
-            "scripts": []
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/@favian/simplor/styles"
+              ]
+            },
+            "scripts": [
+              "node_modules/marked/marked.min.js",
+              "node_modules/prismjs/prism.js",
+              "node_modules/prismjs/components/prism-javascript.min.js",
+              "node_modules/prismjs/components/prism-typescript.min.js",
+              "node_modules/prismjs/components/prism-scss.min.js",
+              "node_modules/prismjs/components/prism-json.min.js",
+              "node_modules/prismjs/components/prism-markup.min.js"
+            ]
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
               "outputHashing": "all"
             },
             "development": {
@@ -65,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "favian-reactive:build:production"
+              "browserTarget": "favian-simplor:build:production"
             },
             "development": {
-              "browserTarget": "favian-reactive:build:development"
+              "browserTarget": "favian-simplor:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "favian-reactive:build"
+            "browserTarget": "favian-simplor:build"
           }
         },
         "test": {
@@ -96,6 +99,44 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        }
+      }
+    },
+    "simplor": {
+      "projectType": "library",
+      "root": "projects/simplor",
+      "sourceRoot": "projects/simplor/src",
+      "prefix": "",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/simplor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/simplor/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/simplor/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/simplor/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }

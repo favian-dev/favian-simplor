@@ -1,0 +1,15 @@
+<spl-toggle-button-group direction="horizontal">
+  <spl-toggle-button
+    *ngFor="let option of options"
+    [value]="option">
+    Option {{option}}
+  </spl-toggle-button>
+</spl-toggle-button-group>
+
+<spl-toggle-button-group direction="vertical">
+  <spl-toggle-button
+    *ngFor="let option of options"
+    [value]="option">
+    Option {{option}}
+  </spl-toggle-button>
+</spl-toggle-button-group>

@@ -1,0 +1,27 @@
+<spl-horizontal-slider
+  [attr.spl-tab-header-align]="headerAlign"
+  class="spl-tab-header">
+  <button
+    (click)="onTabButtonClick(tabButtonIndex)"
+    *ngFor="let item of splTabQueryList; let tabButtonIndex = index"
+    [class.spl-active]="tabButtonIndex === highlightedIndex"
+    class="spl-tab-button"
+    theme="primary"
+    type="button"
+    splEffect>
+    <ng-container [ngTemplateOutlet]="item.tabLabel.templateRef"></ng-container>
+    <span class="spl-tab-indicator"></span>
+  </button>
+</spl-horizontal-slider>
+
+<div
+  #tabBody
+  (scrollend)="onScrollEnd()"
+  class="spl-tab-body">
+  <div
+    #tabWrapper
+    *ngFor="let item of splTabQueryList"
+    class="spl-tab-wrapper">
+    <ng-container [ngTemplateOutlet]="item.tabContent.templateRef"></ng-container>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<spl-radio-group direction="row">
+  <spl-radio-button
+    *ngFor="let option of options"
+    [value]="option">
+    Option {{option}}
+  </spl-radio-button>
+</spl-radio-group>
+
+<spl-radio-group direction="column">
+  <spl-radio-button
+    *ngFor="let option of options"
+    [value]="option">
+    Option {{option}}
+  </spl-radio-button>
+</spl-radio-group>

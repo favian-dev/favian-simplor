@@ -1,0 +1,37 @@
+<spl-modal-header>
+  Title
+</spl-modal-header>
+
+<spl-modal-content>
+  It's a content to display for Users. Every modal can has it's own content.
+
+  <spl-select>
+    <spl-option *ngFor="let item of options">
+      {{item}}
+    </spl-option>
+  </spl-select>
+</spl-modal-content>
+
+<spl-modal-actions>
+  <button
+    (click)="openTestModal()"
+    splModalAction
+    splStrokeButton>
+    Confirm
+  </button>
+
+  <button
+    (click)="openMessage()"
+    splModalAction
+    splStrokeButton>
+    Open Message
+  </button>
+
+  <button
+    (click)="close()"
+    splModalAction
+    splStrokeButton
+    theme="error">
+    Cancel
+  </button>
+</spl-modal-actions>

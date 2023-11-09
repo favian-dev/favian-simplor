@@ -1,0 +1,16 @@
+<input
+  #input
+  (focus)="onElementFocus($event)"
+  (blur)="onElementBlur($event); updateValueFromInput()"
+  [placeholder]="placeholder"
+  [disabled]="disabled"
+  class="spl-date-input-input"
+  type="text"/>
+
+<button
+  (click)="$event.stopPropagation(); openDatePickerCalendarModal()"
+  [disabled]="disabled"
+  class="spl-date-input-button spl-icon-button"
+  splButton>
+  <spl-icon weight="200">calendar_month</spl-icon>
+</button>

@@ -1,0 +1,40 @@
+<spl-toggle-button-group>
+  <spl-toggle-button
+    *ngFor="let option of options"
+    [value]="option">
+    Option {{option}}
+  </spl-toggle-button>
+</spl-toggle-button-group>
+
+<spl-toggle-button-group [(ngModel)]="value">
+  <spl-toggle-button
+    *ngFor="let option of options"
+    [value]="option">
+    Option {{option}}
+  </spl-toggle-button>
+</spl-toggle-button-group>
+
+<spl-toggle-button-group [formControl]="formControl">
+  <spl-toggle-button
+    *ngFor="let option of options"
+    [value]="option">
+    Option {{option}}
+  </spl-toggle-button>
+</spl-toggle-button-group>
+
+<spl-toggle-button-group disabled>
+  <spl-toggle-button
+    *ngFor="let option of options"
+    [value]="option">
+    Option {{option}}
+  </spl-toggle-button>
+</spl-toggle-button-group>
+
+<spl-toggle-button-group>
+  <spl-toggle-button
+    *ngFor="let option of options; let index = index"
+    [disabled]="index === 1"
+    [value]="option">
+    Option {{option}}
+  </spl-toggle-button>
+</spl-toggle-button-group>

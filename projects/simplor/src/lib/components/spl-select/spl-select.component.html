@@ -1,0 +1,15 @@
+<div *ngIf="value && label; else noLabel" class="spl-select-value">
+  {{label}}
+</div>
+
+<ng-template #noLabel>
+  <div class="spl-placeholder">
+    {{placeholder}}
+  </div>
+</ng-template>
+
+<spl-icon class="spl-select-arrow-icon">arrow_drop_down</spl-icon>
+
+<ng-template #optionsTemplate>
+  <ng-content></ng-content>
+</ng-template>

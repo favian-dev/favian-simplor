@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import "projects/simplor/src/styles/init";
+@import "projects/simplor/src/styles/styles";
+
+@include colors();
+@include durations();
+@include font-sizes();
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  overflow: auto;
+}

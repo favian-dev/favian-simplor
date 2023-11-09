@@ -16,6 +16,14 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "paths": {
+      "simplor": [
+        "dist/simplor"
+      ],
+      "@favian/simplor": [
+        "projects/simplor/src"
+      ]
+    },
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,

@@ -1,0 +1,345 @@
+<input
+  placeholder="Placeholder"
+  splInput/>
+
+<textarea
+  placeholder="Placeholder"
+  splTextarea></textarea>
+
+<spl-select>
+  <spl-option *ngFor="let item of options">
+    {{item}}
+  </spl-option>
+</spl-select>
+
+<input
+  disabled
+  placeholder="Placeholder"
+  splInput/>
+
+<textarea
+  disabled
+  placeholder="Placeholder"
+  splTextarea></textarea>
+
+<spl-select disabled>
+  <spl-option *ngFor="let item of options">
+    {{item}}
+  </spl-option>
+</spl-select>
+
+<spl-checkbox></spl-checkbox>
+
+<spl-checkbox disabled></spl-checkbox>
+
+<spl-checkbox [ngModel]="true" disabled></spl-checkbox>
+
+<spl-radio-group [ngModel]="'Banana'">
+  <spl-radio-button
+    *ngFor="let item of options"
+    [value]="item">{{item}}</spl-radio-button>
+</spl-radio-group>
+
+<spl-radio-group [ngModel]="'Banana'" disabled>
+  <spl-radio-button
+    *ngFor="let item of options"
+    [value]="item">{{item}}</spl-radio-button>
+</spl-radio-group>
+
+<button (click)="openModal()">
+  Open Modal
+</button>
+
+<div class="spl-flex spl-items-start spl-column">
+  <button
+    disabled
+    splButton>
+    Button
+  </button>
+
+  <button
+    *ngFor="let theme of THEMES"
+    [theme]="theme"
+    splButton>
+    Button
+  </button>
+
+  <button
+    disabled
+    splFlatButton>
+    Button
+  </button>
+
+  <button
+    *ngFor="let theme of THEMES"
+    [theme]="theme"
+    splFlatButton>
+    Button
+  </button>
+
+  <button
+    disabled
+    splStrokeButton>
+    Button
+  </button>
+
+  <button
+    *ngFor="let theme of THEMES"
+    [theme]="theme"
+    splStrokeButton>
+    Button
+  </button>
+</div>
+
+<spl-calendar [(value)]="date"></spl-calendar>
+
+<spl-calendar
+  [(value)]="rangedDates"
+  type="ranged"></spl-calendar>
+
+<spl-calendar
+  [(value)]="multiDates"
+  type="multi"></spl-calendar>
+
+<div>
+  <spl-date-input
+    (focus)="onFocus()"
+    (blur)="onBlur()"></spl-date-input>
+
+  <spl-date-input
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    placeholder="YYYY-MM-DD"
+    disabled></spl-date-input>
+</div>
+
+<div>
+  <spl-toggle-button-group>
+    <spl-toggle-button
+      *ngFor="let item of options"
+      [value]="item">
+      {{item}}
+    </spl-toggle-button>
+  </spl-toggle-button-group>
+
+  <spl-toggle-button-group direction="vertical">
+    <spl-toggle-button
+      *ngFor="let item of options"
+      [value]="item">
+      {{item}}
+    </spl-toggle-button>
+  </spl-toggle-button-group>
+</div>
+
+<spl-time-input [(ngModel)]="time"></spl-time-input>
+
+<div class="spl-flex spl-items-start">
+  <spl-date-input
+    [(ngModel)]="startDate"
+    [maxDate]="endDate"></spl-date-input>
+
+  <spl-date-input
+    [(ngModel)]="endDate"
+    [minDate]="startDate"></spl-date-input>
+</div>
+
+<spl-progress-bar
+  value="22.5"
+  total="100"
+  class="spl-mt-8"></spl-progress-bar>
+
+<spl-progress-bar
+  value="15"
+  total="18"
+  class="spl-mt-8"></spl-progress-bar>
+
+<spl-progress-bar
+  *ngFor="let item of THEMES; let index = index"
+  [theme]="item"
+  [value]="index + 2"
+  total="18"
+  class="spl-mt-8"></spl-progress-bar>
+
+<spl-tab-group
+  (activeIndexChange)="activeIndexChange($event)">
+  <spl-tab *ngFor="let item of tabs">
+    <ng-template splTabLabel>
+      Tab {{item}}
+    </ng-template>
+
+    <ng-template splTabContent>
+      Content {{item}}
+    </ng-template>
+  </spl-tab>
+</spl-tab-group>
+
+<spl-tab-group
+  (activeIndexChange)="activeIndexChange($event)"
+  headerAlign="start">
+  <spl-tab *ngFor="let item of tabs">
+    <ng-template splTabLabel>
+      Tab {{item}}
+    </ng-template>
+
+    <ng-template splTabContent>
+      Content {{item}}
+    </ng-template>
+  </spl-tab>
+</spl-tab-group>
+
+<spl-tab-group
+  (activeIndexChange)="activeIndexChange($event)"
+  headerAlign="center">
+  <spl-tab *ngFor="let item of tabs">
+    <ng-template splTabLabel>
+      Tab {{item}}
+    </ng-template>
+
+    <ng-template splTabContent>
+      Content {{item}}
+    </ng-template>
+  </spl-tab>
+</spl-tab-group>
+
+<spl-tab-group
+  (activeIndexChange)="activeIndexChange($event)"
+  headerAlign="end">
+  <spl-tab *ngFor="let item of tabs">
+    <ng-template splTabLabel>
+      Tab {{item}}
+    </ng-template>
+
+    <ng-template splTabContent>
+      Content {{item}}
+    </ng-template>
+  </spl-tab>
+</spl-tab-group>
+
+<spl-tab-group
+  (activeIndexChange)="activeIndexChange($event)"
+  activeIndex="3">
+  <spl-tab *ngFor="let item of manyTabs">
+    <ng-template splTabLabel>
+      Tab {{item}}
+    </ng-template>
+
+    <ng-template splTabContent>
+      Content {{item}}
+    </ng-template>
+  </spl-tab>
+</spl-tab-group>
+
+<spl-horizontal-slider>
+  <div class="box">Box</div>
+  <div class="box">Box</div>
+  <div class="box">Box</div>
+  <div class="box">Box</div>
+  <div class="box">Box</div>
+  <div class="box">Box</div>
+  <div class="box">Box</div>
+  <div class="box">Box</div>
+  <div class="box">Box</div>
+  <div class="box">Box</div>
+  <div class="box">Box</div>
+</spl-horizontal-slider>
+
+<button (click)="openMessage()">Open message</button>
+
+<spl-paginator
+  [(page)]="page"
+  [size]="size"
+  [total]="total"></spl-paginator>
+
+<spl-paginator
+  (sizeChange)="onSizeChange($event)"
+  [(page)]="page"
+  [size]="size"
+  [total]="total"
+  [sizeOptions]="[10, 20, 30, 50, 100, 250, 500, 1000, 5000, 10000]"></spl-paginator>
+
+<table
+  [(sort)]="sort"
+  splTable>
+  <thead>
+    <tr>
+      <th
+        name="number"
+        splSortableColumn>
+        No.
+      </th>
+
+      <th
+        name="column1"
+        splSortableColumn>
+        Column
+      </th>
+
+      <th>
+        Column
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of data">
+      <td>
+        {{item}}
+      </td>
+
+      <td>
+        Content of data
+      </td>
+
+      <td>
+        Content of data
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<input
+  [(ngModel)]="requiredValue"
+  splControlValidator
+  splInput
+  required/>
+
+<input
+  [(ngModel)]="requiredValue2"
+  splInput
+  required/>
+
+<spl-form-field>
+  <label>
+    Label
+  </label>
+
+  <input splInput/>
+
+  <spl-error>
+    이게 에러 ?
+  </spl-error>
+
+  <spl-hint>
+    이게 힌트 .. ?
+  </spl-hint>
+</spl-form-field>
+
+<spl-box>
+  이거시 박스
+</spl-box>
+
+<button (click)="openDrawer('left')">
+  Open Left Drawer
+</button>
+
+<button (click)="openDrawer('right')">
+  Open Right Drawer
+</button>
+
+<button (click)="openDrawer('top')">
+  Open Top Drawer
+</button>
+
+<button (click)="openDrawer('bottom')">
+  Open Bottom Drawer
+</button>

@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  height: 9999px; // For scrollbar.
+}
+
+spl-time-input {
+  width: 250px;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 30px;
+  flex: 0 0 auto;
+}
+
+table {
+  width: 100%;
+}

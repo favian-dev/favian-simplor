@@ -1,0 +1,17 @@
+<spl-horizontal-slider
+  (scroll)="onScroll($event)"
+  (scrollend)="onScrollEnd($event)">
+  <div
+    *ngFor="let item of items; let index = index"
+    class="spl-flex-00auto spl-flex spl-flex-center spl-ph-16">
+    Item {{index + 1}}
+  </div>
+</spl-horizontal-slider>
+
+<div class="spl-fs-s spl-mt-4">
+  {{scrolling ? 'Slider is scrolling' : 'Slide is not scrolling'}}
+</div>
+
+<div class="spl-fs-s spl-mt-4">
+  ScrollLeft: {{scrollLeft}}
+</div>

@@ -1,0 +1,14 @@
+@import "projects/simplor/src/styles/styles";
+
+.box {
+  @extend .spl-flex;
+  @extend .spl-flex-center;
+  @extend .spl-fs-s;
+  @extend .spl-clickable;
+  width: 100px;
+  height: 100px;
+}
+
+.box + .box {
+  margin-top: 16px;
+}

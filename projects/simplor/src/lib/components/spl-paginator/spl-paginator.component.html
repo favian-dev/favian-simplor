@@ -1,0 +1,52 @@
+<spl-select
+  (ngModelChange)="sizeChange.emit($event)"
+  [ngModel]="size"
+  *ngIf="showSizeSelector">
+  <spl-option
+    *ngFor="let item of sizeOptions"
+    [value]="item">
+    {{item}}
+  </spl-option>
+</spl-select>
+
+<div class="spl-paginator-wrapper">
+  <div class="spl-paginator-label">
+    {{currentRangeLabel}}
+  </div>
+
+  <div class="spl-paginator-buttons">
+    <button
+      (click)="toFirstPage()"
+      *ngIf="showEndButtons"
+      [disabled]="isFirstPage"
+      class="spl-icon-button"
+      splButton>
+      <spl-icon weight="200">keyboard_double_arrow_left</spl-icon>
+    </button>
+
+    <button
+      (click)="toPreviousPage()"
+      [disabled]="isFirstPage"
+      class="spl-icon-button"
+      splButton>
+      <spl-icon weight="200">chevron_left</spl-icon>
+    </button>
+
+    <button
+      (click)="toNextPage()"
+      [disabled]="isLastPage"
+      class="spl-icon-button"
+      splButton>
+      <spl-icon weight="200">chevron_right</spl-icon>
+    </button>
+
+    <button
+      (click)="toLastPage()"
+      *ngIf="showEndButtons"
+      [disabled]="isLastPage"
+      class="spl-icon-button"
+      splButton>
+      <spl-icon weight="200">keyboard_double_arrow_right</spl-icon>
+    </button>
+  </div>
+</div>
