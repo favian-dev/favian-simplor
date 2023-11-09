@@ -1,6 +1,3 @@
-import { isPlatformBrowser } from '@angular/common';
-import { inject, PLATFORM_ID } from '@angular/core';
-
 /** A key for the log level to set in LocalStorage. */
 export const SPL_LOG_LEVEL_KEY = 'spl-log-level';
 
@@ -18,17 +15,7 @@ export class SplLogger {
   /** Unique id of logger. */
   readonly id = `${(Math.random() * 100000000).toString(16).substring(0, 5)}`;
 
-  /** A platform id of the application. */
-  private readonly _platformId: Object;
-
-  constructor(private _context: string) {
-    this._platformId = inject(PLATFORM_ID);
-  }
-
-  /** Returns true when the platform on which the application is running is browser. */
-  get isPlatformBrowser(): boolean {
-    return isPlatformBrowser(this._platformId);
-  }
+  constructor(private _context: string) {}
 
   /**
    * Create a log level log.
@@ -91,15 +78,13 @@ export class SplLogger {
    * @param data - Data to display.
    */
   private _createLog(level: keyof typeof SplLogLevel, message: string, data: any): void {
-    if (this.isPlatformBrowser) {
-      const loggerLevel = localStorage.getItem(SPL_LOG_LEVEL_KEY) as keyof typeof SplLogLevel | null;
+    const loggerLevel = localStorage.getItem(SPL_LOG_LEVEL_KEY) as keyof typeof SplLogLevel | null;
 
-      if (loggerLevel ? SplLogLevel[loggerLevel] < SplLogLevel[level] : true) {
-        if (data !== undefined) {
-          console[level](`${message}:`, data);
-        } else {
-          console[level](message);
-        }
+    if (loggerLevel ? SplLogLevel[loggerLevel] < SplLogLevel[level] : true) {
+      if (data !== undefined) {
+        console[level](`${message}:`, data);
+      } else {
+        console[level](message);
       }
     }
   }
@@ -112,9 +97,5 @@ export class SplLogger {
  * @param level - A log level to set.
  */
 export function setSplLogLevel(level: keyof typeof SplLogLevel): void {
-  const platformId = inject(PLATFORM_ID);
-
-  if (isPlatformBrowser(platformId)) {
-    localStorage.setItem(SPL_LOG_LEVEL_KEY, level);
-  }
+  localStorage.setItem(SPL_LOG_LEVEL_KEY, level);
 }
