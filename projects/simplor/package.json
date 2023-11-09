@@ -1,10 +1,9 @@
 {
   "name": "@favian/simplor",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "peerDependencies": {
     "@angular/common": "^17.0.0",
-    "@angular/core": "^17.0.0",
-    "material-symbols": "^0.13.0"
+    "@angular/core": "^17.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

@@ -4,24 +4,19 @@ Install the package with the command below.
 npm i @favian/simplor
 ```
 
-Add the following content to `angular.json` to conveniently import Favian Simplor's style.
-
-```json
-"stylePreprocessorOptions": {
-  "includePaths": [
-    "node_modules/@favian/simplor/styles"
-  ]
-},
-```
-
 Import Favian Simplor's style files into the root `styles.scss` file.
 
 ```scss
+// Import to use `SplIcon`.
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp');
+
 // Import the default font used in Favian Simplor and declare css variables.
-@import "init";
+@import "@favian/simplor/styles/init";
 
 // A stylesheet where classes for Favian Simplor's components are declared.
-@import "styles";
+@import "@favian/simplor/styles/styles";
 
 // Mixins declared in `init.scss` declare non-static, configurable CSS variables.
 // These are all required.
