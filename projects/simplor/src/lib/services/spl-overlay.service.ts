@@ -191,6 +191,8 @@ export class SplOverlayRef<Comp = any, Data = any, Result = any>
 
     if (backdrop) {
       this.backdropRef = viewContainerRef.createComponent(backdrop);
+
+      this.backdropRef.changeDetectorRef.detectChanges();
     }
 
     // Create component.
@@ -212,6 +214,8 @@ export class SplOverlayRef<Comp = any, Data = any, Result = any>
 
     this.updateStyles(styles);
     this.addClasses('spl-overlay', ...classes);
+
+    this.componentRef.changeDetectorRef.detectChanges();
   }
 
   /** Destroy the ComponentRef of the backdrop and wrapper. */

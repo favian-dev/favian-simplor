@@ -130,6 +130,8 @@ export class SplModalRef<Comp = any, Data = any, Result = any>
       }),
     });
 
+    this.backdropRef.changeDetectorRef.detectChanges();
+
     this.wrapperRef = viewContainerRef.createComponent(SplModalWrapperComponent);
 
     this.wrapperRef.changeDetectorRef.detectChanges();
@@ -152,6 +154,8 @@ export class SplModalRef<Comp = any, Data = any, Result = any>
 
     this.updateStyles(styles);
     this.addClasses('spl-modal', ...classes);
+
+    this.componentRef.changeDetectorRef.detectChanges();
   }
 
   /** Destroy the ComponentRef of the backdrop and wrapper. */

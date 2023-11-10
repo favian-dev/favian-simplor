@@ -157,6 +157,8 @@ export class SplDrawerRef<Comp = any, Data = any, Result = any>
       }),
     });
 
+    this.backdropRef.changeDetectorRef.detectChanges();
+
     this.wrapperRef = viewContainerRef.createComponent(SplDrawerWrapperComponent, {
       injector: Injector.create({
         providers: [
@@ -189,6 +191,8 @@ export class SplDrawerRef<Comp = any, Data = any, Result = any>
 
     this.updateStyles(styles);
     this.addClasses('spl-drawer', ...classes);
+
+    this.componentRef.changeDetectorRef.detectChanges();
   }
 
   /** Destroy the ComponentRef of the backdrop and wrapper. */
