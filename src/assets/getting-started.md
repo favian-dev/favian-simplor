@@ -4,14 +4,31 @@ Install the package with the command below.
 npm i @favian/simplor
 ```
 
+To use `SplIcon`, add `material-symbols` style to `angular.json`. 
+This setting is required.
+
+`material-symbols` is added to peerDependencies, so you do not need to install it separately.
+
+```json
+{
+  "projects": {
+    "your-project": {
+      "architect": {
+        "build": {
+          "styles": [
+            "src/styles.scss",
+            "node_modules/material-symbols/index.scss"
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
 Import Favian Simplor's style files into the root `styles.scss` file.
 
 ```scss
-// Import to use `SplIcon`.
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
-
 // Import the default font used in Favian Simplor and declare css variables.
 @import "@favian/simplor/styles/init";
 

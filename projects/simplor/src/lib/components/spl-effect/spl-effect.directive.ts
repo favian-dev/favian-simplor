@@ -7,6 +7,7 @@ import {
   HostListener,
   inject,
   Input,
+  PLATFORM_ID,
   Renderer2,
   ViewContainerRef,
 } from '@angular/core';
@@ -16,6 +17,7 @@ import { SplEffectOverlayComponent } from './spl-effect-overlay/spl-effect-overl
 import { BooleanAttribute, Nullable, SplTheme } from '../../utils/type.util';
 import { SplLogger } from '../../utils/logger.util';
 import { convertBooleanAttribute } from '../../utils/convert.util';
+import { isPlatformBrowser } from '@angular/common';
 
 /**
  * This is a Directive that adds hover and active effects to the host element.
@@ -71,10 +73,14 @@ export class SplEffectDirective implements SplElementAccessor<HTMLElement>, SplT
   /** This is an Injected renderer. */
   private _renderer: Renderer2;
 
+  /** Current running platform id. */
+  private _platformId: Object;
+
   constructor() {
     this.elementRef = inject(ElementRef);
     this._viewContainerRef = inject(ViewContainerRef);
     this._renderer = inject(Renderer2);
+    this._platformId = inject(PLATFORM_ID);
   }
 
   /**
@@ -102,8 +108,10 @@ export class SplEffectDirective implements SplElementAccessor<HTMLElement>, SplT
   }
 
   ngAfterContentInit(): void {
-    this._setInitialPosition();
-    this._setInitialOverflow();
+    if (isPlatformBrowser(this._platformId)) {
+      this._setInitialPosition();
+      this._setInitialOverflow();
+    }
   }
 
   /** Listen to the focus event and display the hover effect. */

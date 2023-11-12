@@ -78,14 +78,18 @@ export class SplLogger {
    * @param data - Data to display.
    */
   private _createLog(level: keyof typeof SplLogLevel, message: string, data: any): void {
-    const loggerLevel = localStorage.getItem(SPL_LOG_LEVEL_KEY) as keyof typeof SplLogLevel | null;
+    try {
+      const loggerLevel = localStorage.getItem(SPL_LOG_LEVEL_KEY) as keyof typeof SplLogLevel | null;
 
-    if (loggerLevel ? SplLogLevel[loggerLevel] < SplLogLevel[level] : true) {
-      if (data !== undefined) {
-        console[level](`${message}:`, data);
-      } else {
-        console[level](message);
+      if (loggerLevel ? SplLogLevel[loggerLevel] < SplLogLevel[level] : true) {
+        if (data !== undefined) {
+          console[level](`${message}:`, data);
+        } else {
+          console[level](message);
+        }
       }
+    } catch (e) {
+      console.warn(`Log output is limited: ${(e as any)?.toString()}`);
     }
   }
 }
@@ -97,5 +101,9 @@ export class SplLogger {
  * @param level - A log level to set.
  */
 export function setSplLogLevel(level: keyof typeof SplLogLevel): void {
-  localStorage.setItem(SPL_LOG_LEVEL_KEY, level);
+  try {
+    localStorage.setItem(SPL_LOG_LEVEL_KEY, level);
+  } catch (e) {
+    console.warn(`Log level setting is limited: ${(e as any)?.toString()}`);
+  }
 }

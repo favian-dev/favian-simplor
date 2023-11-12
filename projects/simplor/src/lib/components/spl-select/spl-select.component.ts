@@ -71,9 +71,6 @@ export class SplSelectComponent<Value>
   /** Logger for SplSelectComponent. */
   private readonly _logger = new SplLogger('SplSelectComponent');
 
-  /** This is the state of whether the view has been initialized. */
-  private _viewInitialized = false;
-
   /** Timeout timer to prevent NG0100 error when updating the label according to the selected option. */
   private _renderTimer: any;
 
