@@ -5,6 +5,7 @@ import {
   inject,
   Injectable,
   Injector,
+  PLATFORM_ID,
   Type,
   ViewContainerRef,
 } from '@angular/core';
@@ -13,9 +14,10 @@ import { SplLogger } from '../utils/logger.util';
 import { CanUndefined } from '../utils/type.util';
 import { SplOverlayServiceLike } from '../interfaces/spl-overlay-service-like';
 import { SplOverlayRefLike } from '../interfaces/spl-overlay-ref-like';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { SplOverlayBaseOptions } from '../interfaces/spl-overlay-base-options';
 import { SplOverlayRefCommonOptions } from '../interfaces/spl-overlay-ref-common-options';
+import { SplError } from '../utils/error.util';
 
 /**
  * A service for opening a component as an overlay.
@@ -43,6 +45,12 @@ export class SplOverlayService implements SplOverlayServiceLike {
    */
   readonly openedOverlays: SplOverlayRef[] = [];
 
+  /** Logger for SplOverlayService. */
+  private readonly _logger = new SplLogger('SplOverlayService');
+
+  /** Current running platform id. */
+  private readonly _platformId: Object;
+
   /** Injected Document object to listen 'escape' keydown event. */
   private readonly _document: Document;
 
@@ -50,27 +58,33 @@ export class SplOverlayService implements SplOverlayServiceLike {
   private readonly _applicationRef: ApplicationRef;
 
   /** Injected ViewContainerRef fo AppRoot to render SplOverlayOutletComponent. */
-  private readonly _rootViewContainerRef: ViewContainerRef;
+  private _rootViewContainerRef?: ViewContainerRef;
 
   /** ComponentRef of rendered SplOverlayOutletComponent. */
-  private readonly _overlayOutletComponentRef: ComponentRef<SplOverlayOutletComponent>;
+  private _overlayOutletComponentRef?: ComponentRef<SplOverlayOutletComponent>;
+
+  /** Interval timer for waiting for the ready state of AppComponent. */
+  private _initializeTimer: any;
 
   constructor() {
+    this._platformId = inject(PLATFORM_ID);
     this._document = inject(DOCUMENT);
     this._applicationRef = inject(ApplicationRef);
-    this._rootViewContainerRef = this._applicationRef.components[0].injector.get(ViewContainerRef);
-    this._overlayOutletComponentRef = this._rootViewContainerRef.createComponent(SplOverlayOutletComponent);
 
-    this._document.addEventListener('keydown', (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        this.closeLatest();
-      }
-    });
+    if (isPlatformBrowser(this._platformId)) {
+      this._initializeOutlet();
+
+      this._document.addEventListener('keydown', (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          this.closeLatest();
+        }
+      });
+    }
   }
 
   /** Returns ViewContainerRef of AppRoot. */
-  get outletViewContainerRef(): ViewContainerRef {
-    return this._overlayOutletComponentRef.instance.viewContainerRef;
+  get outletViewContainerRef(): CanUndefined<ViewContainerRef> {
+    return this._overlayOutletComponentRef?.instance.viewContainerRef;
   }
 
   /**
@@ -83,6 +97,10 @@ export class SplOverlayService implements SplOverlayServiceLike {
     component: Type<Comp>,
     options: SplOverlayOptions<Data> = {},
   ): SplOverlayRef<Comp, Data, Result> {
+    if (!this.outletViewContainerRef) {
+      throw new SplError('outletViewContainerRef is not ready');
+    }
+
     const { multi = false } = options;
 
     const existingOverlayRef = this.findOverlayRef(component);
@@ -144,6 +162,22 @@ export class SplOverlayService implements SplOverlayServiceLike {
    */
   findOverlayRef(component: Type<any>): CanUndefined<SplOverlayRefLike<any, any, any, any>> {
     return this.openedOverlays.find((openedOverlayItem) => openedOverlayItem.componentRef.componentType === component);
+  }
+
+  /** After waiting for the AppComponent to be ready, initialize the overlay outlet. */
+  private _initializeOutlet(): void {
+    clearInterval(this._initializeTimer);
+
+    this._initializeTimer = setInterval(() => {
+      if (this._applicationRef.components[0]) {
+        this._rootViewContainerRef = this._applicationRef.components[0].injector.get(ViewContainerRef);
+        this._overlayOutletComponentRef = this._rootViewContainerRef.createComponent(SplOverlayOutletComponent);
+
+        clearInterval(this._initializeTimer);
+
+        this._logger.debug('OverlayOutlet is initialized');
+      }
+    });
   }
 }
 

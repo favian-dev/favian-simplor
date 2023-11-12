@@ -8,6 +8,7 @@ import { SplDrawerWrapperComponent } from '../components/spl-drawer-wrapper/spl-
 import { SplLogger } from '../utils/logger.util';
 import { SplOverlayBaseOptions } from '../interfaces/spl-overlay-base-options';
 import { SplOverlayRefCommonOptions } from '../interfaces/spl-overlay-ref-common-options';
+import { SplError } from '../utils/error.util';
 
 /**
  * A type that defines the starting direction of the drawer.
@@ -50,6 +51,10 @@ export class SplDrawerService implements SplOverlayServiceLike {
     component: Type<Comp>,
     options: SplDrawerOptions<Data>,
   ): SplDrawerRef<Comp, Data, Result> {
+    if (!this._overlayService.outletViewContainerRef) {
+      throw new SplError('outletViewContainerRef is not ready');
+    }
+
     const { multi = false } = options;
 
     const existingDrawerRef = this._overlayService.findOverlayRef(component);

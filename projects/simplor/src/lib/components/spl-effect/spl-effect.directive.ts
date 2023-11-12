@@ -74,7 +74,7 @@ export class SplEffectDirective implements SplElementAccessor<HTMLElement>, SplT
   private _renderer: Renderer2;
 
   /** Current running platform id. */
-  private _platformId: Object;
+  private readonly _platformId: Object;
 
   constructor() {
     this.elementRef = inject(ElementRef);

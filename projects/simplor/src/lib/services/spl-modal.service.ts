@@ -8,6 +8,7 @@ import { SplOverlayRefLike } from '../interfaces/spl-overlay-ref-like';
 import { SplOverlayServiceLike } from '../interfaces/spl-overlay-service-like';
 import { SplOverlayBaseOptions } from '../interfaces/spl-overlay-base-options';
 import { SplOverlayRefCommonOptions } from '../interfaces/spl-overlay-ref-common-options';
+import { SplError } from '../utils/error.util';
 
 /** Injection token for data to be injected into the modal. */
 export const SPL_MODAL_DATA = 'SPL_MODAL_DATA';
@@ -32,6 +33,10 @@ export class SplModalService implements SplOverlayServiceLike {
     component: Type<Comp>,
     options: SplOverlayBaseOptions<Data> = {},
   ): SplModalRef<Comp, Data, Result> {
+    if (!this._overlayService.outletViewContainerRef) {
+      throw new SplError('outletViewContainerRef is not ready');
+    }
+
     const { multi = false } = options;
 
     const existingModalRef = this._overlayService.findOverlayRef(component);
