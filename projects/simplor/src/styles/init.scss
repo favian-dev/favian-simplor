@@ -45,10 +45,9 @@
   $primary: get-or-default($options, 'primary', #006AE5);
   $secondary: get-or-default($options, 'secondary', #373538);
   $tertiary: get-or-default($options, 'tertiary', #0D6986);
-  $tertiary: get-or-default($options, 'tertiary', #0D6986);
-  $warn: get-or-default($options, 'warn', #0D6986);
-  $error: get-or-default($options, 'error', #0D6986);
-  $success: get-or-default($options, 'success', #0D6986);
+  $warn: get-or-default($options, 'warn', #FFC42C);
+  $error: get-or-default($options, 'error', #E51C00);
+  $success: get-or-default($options, 'success', #19CF57);
   $light-background: get-or-default($options, 'light-background', #fff);
   $light-foreground: get-or-default($options, 'light-foreground', #333);
   $dark-background: get-or-default($options, 'dark-background', #444);
