@@ -66,6 +66,7 @@ import { ToggleButtonGroupExampleIiComponent } from './toggle-button-group-examp
 import { RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { CanUndefined, Nullable, SplIconComponent } from '@favian/simplor';
+import { IconExampleIiiComponent } from './icon-example-iii/icon-example-iii.component';
 
 export interface UsageNavigationItem {
   hash: string;
@@ -151,6 +152,7 @@ export interface UsageNavigationItem {
     RouterLink,
     MarkdownModule,
     SplIconComponent,
+    IconExampleIiiComponent,
   ],
 })
 export class UsagePageComponent implements AfterViewInit {
@@ -393,6 +395,10 @@ export class UsagePageComponent implements AfterViewInit {
             {
               hash: 'icon-example-ii',
               label: 'Font variables',
+            },
+            {
+              hash: 'icon-example-iii',
+              label: 'Customize icon default appearance',
             },
           ],
         },

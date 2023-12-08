@@ -1,7 +1,8 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Inject, Input, Optional } from '@angular/core';
 import { BooleanAttribute } from '../../utils/type.util';
 import { convertBooleanAttribute } from '../../utils/convert.util';
 import { CommonModule } from '@angular/common';
+import { SPL_ICON_PROVIDER, SplIconOptions } from './spl-icon-provider';
 
 /** Type definition available for icon. */
 export type SplIconType = 'outlined' | 'rounded' | 'sharp';
@@ -33,25 +34,35 @@ export class SplIconComponent {
    * Sets the type of icon.
    * You can specify 'outlined', 'rounded', or 'sharp', and the default is 'outlined'.
    */
-  @Input() type: SplIconType = 'outlined';
+  @Input() type: SplIconType;
 
   /**
    * Sets the weight of the icon.
    * You can specify values from '100' to '700' in increments of 100, and the default value is '400'.
    */
-  @Input() weight: SplIconWeight = '400';
+  @Input() weight: SplIconWeight;
 
   /**
    * Sets the grade of the icon.
    * You can specify '-25', '0', and '200', and the default value is '0'.
    */
-  @Input() grade: SplIconGrade = '0';
+  @Input() grade: SplIconGrade;
 
   /**
    * Sets the optical size of the icon.
    * You can specify '20', '24', '40', and '48', and the default is '24'.
    */
-  @Input() opticalSize: SplIconOpticalSize = '24';
+  @Input() opticalSize: SplIconOpticalSize;
+
+  constructor(@Inject(SPL_ICON_PROVIDER) @Optional() private _options: SplIconOptions) {
+    const { type = 'outlined', weight = '400', grade = '0', opticalSize = '24', fill = false } = this._options || {};
+
+    this.type = type;
+    this.weight = weight;
+    this.grade = grade;
+    this.opticalSize = opticalSize;
+    this.fill = fill;
+  }
 
   /** This is the state of whether the icon is filled. */
   private _fill = false;
