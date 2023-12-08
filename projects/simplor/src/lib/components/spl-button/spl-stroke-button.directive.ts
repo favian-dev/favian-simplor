@@ -1,6 +1,5 @@
 import { Directive } from '@angular/core';
-import { SplButtonDirective } from './spl-button.directive';
-import { SplEffectDirective } from '../spl-effect/spl-effect.directive';
+import { SplButtonEffectBaseDirective } from './spl-button-effect-base.directive';
 
 /**
  * This is a Directive that creates a button with a border.
@@ -11,12 +10,6 @@ import { SplEffectDirective } from '../spl-effect/spl-effect.directive';
   host: {
     class: 'spl-stroke-button',
   },
-  hostDirectives: [
-    {
-      directive: SplEffectDirective,
-      inputs: ['theme', 'disableEffect'],
-    },
-  ],
   standalone: true,
 })
-export class SplStrokeButtonDirective extends SplButtonDirective {}
+export class SplStrokeButtonDirective extends SplButtonEffectBaseDirective {}

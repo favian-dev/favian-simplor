@@ -1,6 +1,5 @@
 import { Directive } from '@angular/core';
-import { SplButtonDirective } from './spl-button.directive';
-import { SplContrastEffectDirective } from '../spl-effect/spl-contrast-effect.directive';
+import { SplButtonContrastEffectBaseDirective } from './spl-button-contrast-effect-base.directive';
 
 /**
  * This Directive creates a button filled with the given theme color.
@@ -11,12 +10,6 @@ import { SplContrastEffectDirective } from '../spl-effect/spl-contrast-effect.di
   host: {
     class: 'spl-flat-button',
   },
-  hostDirectives: [
-    {
-      directive: SplContrastEffectDirective,
-      inputs: ['theme', 'disableEffect'],
-    },
-  ],
   standalone: true,
 })
-export class SplFlatButtonDirective extends SplButtonDirective {}
+export class SplFlatButtonDirective extends SplButtonContrastEffectBaseDirective {}

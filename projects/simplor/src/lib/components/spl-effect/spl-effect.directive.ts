@@ -52,6 +52,9 @@ export class SplEffectDirective implements SplElementAccessor<HTMLElement>, SplT
   /** The ElementRef of the host element. */
   elementRef: ElementRef<HTMLElement>;
 
+  /** Current running platform id. */
+  protected readonly _platformId: Object;
+
   /** The logger of SplEffectDirective. */
   private readonly _logger = new SplLogger('SplEffectDirective');
 
@@ -72,9 +75,6 @@ export class SplEffectDirective implements SplElementAccessor<HTMLElement>, SplT
 
   /** This is an Injected renderer. */
   private _renderer: Renderer2;
-
-  /** Current running platform id. */
-  private readonly _platformId: Object;
 
   constructor() {
     this.elementRef = inject(ElementRef);

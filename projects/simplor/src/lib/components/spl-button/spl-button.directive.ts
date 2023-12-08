@@ -1,7 +1,5 @@
-import { Directive, HostBinding, Input } from '@angular/core';
-import { SplTheme } from '../../utils/type.util';
-import { SplThemeAttribute } from '../../interfaces/spl-theme-attribute';
-import { SplEffectDirective } from '../spl-effect/spl-effect.directive';
+import { Directive } from '@angular/core';
+import { SplButtonEffectBaseDirective } from './spl-button-effect-base.directive';
 
 /**
  * This is a Directive that creates the most basic form of button.
@@ -10,19 +8,6 @@ import { SplEffectDirective } from '../spl-effect/spl-effect.directive';
  */
 @Directive({
   selector: 'button[splButton]',
-  host: {
-    class: 'spl-button',
-    type: 'button',
-  },
-  hostDirectives: [
-    {
-      directive: SplEffectDirective,
-      inputs: ['theme', 'disableEffect'],
-    },
-  ],
   standalone: true,
 })
-export class SplButtonDirective implements SplThemeAttribute {
-  /** Use one of the 'SplTheme' values and set the theme of the button and effect. */
-  @Input() @HostBinding('attr.spl-theme') theme: SplTheme = 'none';
-}
+export class SplButtonDirective extends SplButtonEffectBaseDirective {}
