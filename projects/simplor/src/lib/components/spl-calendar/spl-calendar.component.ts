@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Inject, Input, OnInit, Optional, Output } from '@angular/core';
 import { SPL_CALENDAR_PROVIDER, SplCalendarOptions } from './spl-calendar-provider';
 import { Nullable, NumberLike, RangedDate } from '../../utils/type.util';
 import { convertNumberLike } from '../../utils/convert.util';
@@ -7,6 +7,8 @@ import { SplLogger } from '../../utils/logger.util';
 import { CommonModule } from '@angular/common';
 import { SplButtonDirective } from '../spl-button/spl-button.directive';
 import { SplIconComponent } from '../spl-icon/spl-icon.component';
+import { SplCalendarDateDirective } from './spl-calendar-date.directive';
+import { SplCalendarDateExtraDirective } from './spl-calendar-date-extra.directive';
 
 /**
  * Definition of the 'type' value that can be used in SplCalendarComponent.
@@ -87,6 +89,13 @@ export class SplCalendarComponent<Value extends any> implements OnInit {
    * The value is the same as the Date.getMonth() value.
    */
   @Output() displayMonthChange = new EventEmitter<number>();
+
+  /** Content child of SplCalendarDateDirective to replace date display */
+  @ContentChild(SplCalendarDateDirective, { descendants: true }) calendarDateDirective?: SplCalendarDateDirective;
+
+  /** Content child of SplCalendarDateExtraDirective to replace date display */
+  @ContentChild(SplCalendarDateExtraDirective, { descendants: true })
+  calendarDateExtraDirective?: SplCalendarDateExtraDirective;
 
   /**
    * This is the date currently displayed on the calendar.

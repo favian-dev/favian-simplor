@@ -37,21 +37,94 @@
 </div>
 
 <div class="spl-calendar-dates">
+  @for (item of dates; track item.toString()) {
+    <ng-container
+      [ngTemplateOutlet]="dateTemplate"
+      [ngTemplateOutletContext]="{
+        date: item,
+        selected: isSelectedDate(item),
+        today: isToday(item),
+        ranged: isRangedDate(item),
+        startDate: isStartDate(item),
+        endDate: isEndDate(item),
+        outOfCalendar: isOutOfCalendar(item) || isLessThanMinDate(item) || isMoreThanMaxDate(item),
+        disabled: isLessThanMinDate(item) || isMoreThanMaxDate(item),
+      }"></ng-container>
+  }
+
+<!--  <div-->
+<!--    *ngFor="let item of dates; trackBy: trackByFn"-->
+<!--    [class.spl-out-of-calendar]="isOutOfCalendar(item) || isLessThanMinDate(item) || isMoreThanMaxDate(item)"-->
+<!--    [class.spl-selected]="isSelectedDate(item)"-->
+<!--    [class.spl-today]="isToday(item)"-->
+<!--    [class.spl-ranged]="isRangedDate(item)"-->
+<!--    [class.spl-start-date]="isStartDate(item)"-->
+<!--    [class.spl-end-date]="isEndDate(item)"-->
+<!--    class="spl-calendar-date">-->
+<!--    <button-->
+<!--      (click)="onDateClick(item)"-->
+<!--      [disabled]="isLessThanMinDate(item) || isMoreThanMaxDate(item)"-->
+<!--      class="spl-icon-button"-->
+<!--      splButton>-->
+<!--      {{item | date: dateFormat: dateFormatTimezone}}-->
+<!--    </button>-->
+<!--  </div>-->
+</div>
+
+<ng-template
+  #dateTemplate
+  let-date="date"
+  let-selected="selected"
+  let-today="today"
+  let-ranged="ranged"
+  let-startDate="startDate"
+  let-endDate="endDate"
+  let-outOfCalendar="outOfCalendar"
+  let-disabled="disabled">
   <div
-    *ngFor="let item of dates; trackBy: trackByFn"
-    [class.spl-out-of-calendar]="isOutOfCalendar(item) || isLessThanMinDate(item) || isMoreThanMaxDate(item)"
-    [class.spl-selected]="isSelectedDate(item)"
-    [class.spl-today]="isToday(item)"
-    [class.spl-ranged]="isRangedDate(item)"
-    [class.spl-start-date]="isStartDate(item)"
-    [class.spl-end-date]="isEndDate(item)"
+    [class.spl-out-of-calendar]="outOfCalendar"
+    [class.spl-selected]="selected"
+    [class.spl-today]="today"
+    [class.spl-ranged]="ranged"
+    [class.spl-start-date]="startDate"
+    [class.spl-end-date]="endDate"
     class="spl-calendar-date">
     <button
-      (click)="onDateClick(item)"
-      [disabled]="isLessThanMinDate(item) || isMoreThanMaxDate(item)"
+      (click)="onDateClick(date)"
+      [disabled]="disabled"
       class="spl-icon-button"
       splButton>
-      {{item | date: dateFormat: dateFormatTimezone}}
+      @if (calendarDateDirective) {
+        <ng-container
+          [ngTemplateOutlet]="calendarDateDirective.templateRef"
+          [ngTemplateOutletContext]="{
+            date,
+            selected,
+            today,
+            ranged,
+            startDate,
+            endDate,
+            outOfCalendar,
+            disabled,
+          }"></ng-container>
+      } @else {
+        {{ date | date: dateFormat: dateFormatTimezone }}
+      }
     </button>
+
+    @if (calendarDateExtraDirective) {
+      <ng-container
+        [ngTemplateOutlet]="calendarDateExtraDirective.templateRef"
+        [ngTemplateOutletContext]="{
+          date,
+          selected,
+          today,
+          ranged,
+          startDate,
+          endDate,
+          outOfCalendar,
+          disabled,
+        }"></ng-container>
+    }
   </div>
-</div>
+</ng-template>

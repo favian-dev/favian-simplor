@@ -1,0 +1,33 @@
+<spl-calendar>
+  <ng-template
+    let-date="date"
+    let-today="today"
+    splCalendarDate>
+    @if (today) {
+      T
+    } @else {
+      {{ date | date: 'd' }}
+    }
+  </ng-template>
+</spl-calendar>
+
+<spl-calendar>
+  <ng-template
+    let-date="date"
+    let-today="today"
+    splCalendarDate>
+    @if (today) {
+      T
+    } @else {
+      {{ date | date: 'd' }}
+    }
+  </ng-template>
+
+  <ng-template
+    let-date="date"
+    splCalendarDateExtra>
+    @if (getCalendarData(date)) {
+      <div class="badge"></div>
+    }
+  </ng-template>
+</spl-calendar>

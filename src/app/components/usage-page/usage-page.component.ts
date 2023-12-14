@@ -67,6 +67,7 @@ import { RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { CanUndefined, Nullable, SplIconComponent } from '@favian/simplor';
 import { IconExampleIiiComponent } from './icon-example-iii/icon-example-iii.component';
+import { CalendarExampleViComponent } from './calendar-example-vi/calendar-example-vi.component';
 
 export interface UsageNavigationItem {
   hash: string;
@@ -153,6 +154,7 @@ export interface UsageNavigationItem {
     MarkdownModule,
     SplIconComponent,
     IconExampleIiiComponent,
+    CalendarExampleViComponent,
   ],
 })
 export class UsagePageComponent implements AfterViewInit {
@@ -235,6 +237,10 @@ export class UsagePageComponent implements AfterViewInit {
             {
               hash: 'calendar-example-v',
               label: 'Customize calendar',
+            },
+            {
+              hash: 'calendar-example-vi',
+              label: 'Customize calendar date display',
             },
           ],
         },
