@@ -1,7 +1,7 @@
 Install the package with the command below.
 
 ```shell
-npm i @favian/simplor
+npm i @favian/simplor material-symbols
 ```
 
 To use `SplIcon`, add `material-symbols` style to `angular.json`. 

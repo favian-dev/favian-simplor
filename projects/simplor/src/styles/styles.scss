@@ -579,6 +579,8 @@ html, body, input, textarea, button, h1, h2, h3, h4, h5, h6 {
     @extend .spl-clickable;
 
     .spl-select-value {
+      @extend .spl-flex-11auto;
+      width: auto;
       color: inherit;
     }
 

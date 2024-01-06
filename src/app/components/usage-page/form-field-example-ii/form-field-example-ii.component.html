@@ -11,15 +11,15 @@
     splControlValidator
     splInput/>
 
-  <ng-container *ngIf="emailValidator.invalid; else emailNotInvalid">
-    <spl-error *ngIf="emailValidator.hasError('email')">
-      Invalid email
-    </spl-error>
-  </ng-container>
-
-  <ng-template #emailNotInvalid>
+  @if (emailValidator.invalid) {
+    @if (emailValidator.hasError('email')) {
+      <spl-error>
+        Invalid email
+      </spl-error>
+    }
+  } @else {
     <spl-hint>
       Input email
     </spl-hint>
-  </ng-template>
+  }
 </spl-form-field>

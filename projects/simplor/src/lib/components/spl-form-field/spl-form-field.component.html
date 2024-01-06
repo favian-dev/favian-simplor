@@ -4,6 +4,8 @@
   <ng-content></ng-content>
 </div>
 
-<div class="spl-form-field-items">
-  <ng-content select="spl-error, spl-hint"></ng-content>
+<div
+  #formFieldItems
+  class="spl-form-field-items">
+  <ng-content select=".spl-error, .spl-hint"></ng-content>
 </div>

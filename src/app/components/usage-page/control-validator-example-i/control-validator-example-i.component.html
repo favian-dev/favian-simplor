@@ -5,15 +5,13 @@
   required/>
 
 <div class="spl-fs-s spl-mt-4">
-  <ng-container *ngIf="ngModelValidator.invalid; else valid">
-    <ng-container *ngIf="ngModelValidator.hasError('required')">
+  @if (ngModelValidator) {
+    @if (ngModelValidator.hasError('required')) {
       Input is required.
-    </ng-container>
-  </ng-container>
-
-  <ng-template #valid>
+    }
+  } @else {
     The validator's invalid getter returns true when the control is invalid and in a touched or dirty state.
-  </ng-template>
+  }
 </div>
 
 <input
@@ -25,17 +23,15 @@
   required/>
 
 <div class="spl-fs-s spl-mt-4">
-  <ng-container *ngIf="formControlValidator.invalid; else valid">
-    <ng-container *ngIf="formControlValidator.hasError('required')">
+  @if (formControlValidator) {
+    @if (formControlValidator.hasError('required')) {
       Input is required.
-    </ng-container>
+    }
 
-    <ng-container *ngIf="formControlValidator.hasError('email')">
+    @if (formControlValidator.hasError('email')) {
       Incorrect email.
-    </ng-container>
-  </ng-container>
-
-  <ng-template #valid>
+    }
+  } @else {
     The validator's invalid getter returns true when the control is invalid and in a touched or dirty state.
-  </ng-template>
+  }
 </div>

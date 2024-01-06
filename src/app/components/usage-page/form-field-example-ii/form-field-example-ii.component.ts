@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
   SplControlValidatorDirective,
   SplErrorComponent,
@@ -13,7 +12,6 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
   selector: 'app-form-field-example-ii',
   standalone: true,
   imports: [
-    CommonModule,
     SplFormFieldComponent,
     SplInputDirective,
     SplHintComponent,

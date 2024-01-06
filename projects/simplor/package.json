@@ -1,6 +1,6 @@
 {
   "name": "@favian/simplor",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "peerDependencies": {
     "@angular/common": "^17.0.8",
     "@angular/core": "^17.0.8"
